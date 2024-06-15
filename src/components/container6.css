@@ -1,0 +1,46 @@
+.container6{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inner{
+        width: 60%;
+        height: 70%;
+        top: 4878px;
+        left: 364px;
+        border-radius: 12px;
+        background-color: rgba(31, 208, 194, 1);
+        background-image: url('./Assets/Vector 18.png');
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        gap: 20%;
+
+        .heading{
+            width: 480px;
+            height: 122px;
+            top: 136px;
+            left: 320px;
+            font-family: Plus Jakarta Sans;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 48px;
+            letter-spacing: 0em;
+            text-align: center;
+        }
+
+        .playstore{
+            display: flex;
+            width: 420px;
+            height: 64px;
+            top: 297px;
+            left: 350.0000305175781px;
+            gap: 40px;
+
+
+        }
+    }
+}

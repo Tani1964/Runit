@@ -1,0 +1,132 @@
+.footer{
+    .top{
+        display: flex;
+        justify-content: space-around;
+        width: 1,440px;
+        height: 125px;
+        top: 6327px;
+        left: 204px;
+        padding: 0px 160px 0px 160px;
+    }
+
+    .bottom{
+        margin-top: 5%;
+        height: 13px;
+        top: 6544px;
+        left: 838px;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 12.6px;
+        letter-spacing: 2%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.socials{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    top: 6327px;
+    left: 204px;
+    justify-content: space-between;
+
+    .mainlogo{
+        width: 101px;
+        height: 24px;
+        gap: 8px;
+    }
+    .socialslogo{
+        display: flex;
+        width: 165.52px;
+        height: 24px;
+        justify-content: space-between;
+    }
+    
+}
+
+
+.quicklinks{
+    display: flex;
+    flex-direction: column;
+    width: 116px;
+    height: 125px;
+    gap: 8px;
+
+    .header{
+        width: 116px;
+        height: 25px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20.16px;
+        letter-spacing: 2%;
+        margin-bottom: 0%;
+    }
+
+    .links{
+        display: flex;
+        flex-direction: column;
+        width:  89px;
+        height: 92px;
+        gap: 16px;
+        padding-left: 0%;
+    }
+
+    li{
+        text-align: left
+    }
+}
+
+.legal{
+    display: flex;
+    flex-direction: column;
+    width: 167px;
+    height: 125px;
+    gap: 8px;
+
+    .header{
+        width: 116px;
+        height: 25px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20.16px;
+        letter-spacing: 2%;
+        margin-bottom: 0%;
+    }
+
+    .links{
+        display: flex;
+        flex-direction: column;
+        width:  167px;
+        height: 92px;
+        gap: 16px;
+        padding-left: 0%;
+    }
+
+    li{
+        text-align: left
+    }
+}
+
+.bottom{
+    .line{
+        border: 1px solid rgba(2, 1, 49, 0.1);
+        width: 1120.0000000000043px;
+        top: 6511.5px;
+        left: 364px;
+
+    }
+    
+    .copyright{
+        color: rgba(2, 1, 49, 0.5);
+        width: 172px;
+        height: 13px;
+        top: 6544px;
+        left: 838px;
+    }
+}
+
+ul{
+    list-style: none;
+}
