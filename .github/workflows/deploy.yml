@@ -1,6 +1,7 @@
-name: Deploy
+name: Deploy on
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -16,6 +17,8 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Specify the Node.js version you want to use
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
