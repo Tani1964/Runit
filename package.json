@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Tani1964.github.io/",
+  "homepage": "http://runittech.co/",
   "scripts": {
     "dev": "vite",
     "tail": "npx tailwindcss -i ./src/index.css -o ./src/output.css --watch",
