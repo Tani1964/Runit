@@ -45,7 +45,7 @@ function Container5() {
           </div>
           <div className="steps pb-20">
             <div className="con shadow-lg p-4 border-2 border-gray-200 rounded-lg">
-              <div className="step flex justify-between ">
+              <div className="step flex justify-between gap-10 ">
                 <div className="flex gap-5">
                   <h1 className="num">01.</h1>
                   <p>Sign Up and Create an Account</p>
