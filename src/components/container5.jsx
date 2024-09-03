@@ -25,8 +25,8 @@ function showInner(text, arrow) {
 
 function Container5() {
   return (
-    <div className="container5">
-      <div className="inner flex gap-6">
+    <div className="container5 w-screen">
+      <div className="inner flex gap-6 w-full">
         <div className="heading gap-4">
           <h1 className="font-bold text-5xl">Here’s how it works</h1>
           <p className="">

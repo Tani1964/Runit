@@ -42,55 +42,55 @@ function Container2() {
 
   return (
     <div id="container2" className="pt-10 bg-arrow relative">
-      <div id="main" className="flex px-5 py-[16px] justify-between mb-10">
-        <div className="grid w-[15%] invisible md:visible">
+      <div id="main" className="flex flex-col md:flex-row px-5 py-4 justify-between items-center mb-10">
+        <div className="grid w-1/5 hidden md:block">
           <div className="flex justify-end animate-bounce">
-            <img src={Group99} alt="" />
+            <img src={Group99} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
           </div>
           <div></div>
           <div className="flex justify-start animate-bounce">
-            <img src={Other16} alt="" />
+            <img src={Other16} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
           </div>
         </div>
-        <div className="text-center pt-12">
-          <div className="flex">
-            <h1 className="font-bold  text-5xl flex">
+        <div className="text-center pt-8 md:pt-12">
+          <div className="flex justify-center">
+            <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl flex flex-col md:flex-row items-center">
               Helping you get things done,
               <br /> one errand at a time
               <img
                 id=""
-                className="h-10"
+                className="h-8 sm:h-10 md:h-12"
                 src={FastDelivery}
                 alt="Fast Delivery"
                 style={{ animation: "bounce 2s infinite" }}
               />
             </h1>
           </div>
-          <div className="mt-10">
-            <p className="text-base">
+          <div className="mt-6 md:mt-10">
+            <p className="text-sm sm:text-base">
               Get the help you need, when you need it! - RUNIT connects you with
-              trusted helpers in <br /> your community, ready to assist you with
+              trusted helpers in <br className="hidden sm:block"/> your community, ready to assist you with
               your errands!
             </p>
           </div>
         </div>
-        <div className="grid w-[15%] invisible md:visible ">
-          <div className="one flex animate-bounce">
-            <img src={Package} alt="" />
+        <div className="grid w-1/5 hidden md:block">
+          <div className="flex animate-bounce">
+            <img src={Package} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
           </div>
           <div></div>
           <div className="flex justify-end animate-bounce">
-            <img src={ShoppingBasket} alt="" />
+            <img src={ShoppingBasket} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
           </div>
         </div>
       </div>
-      <div id="phone_view" className="flex flex-col justify-center gap-10">
-        <div id="play_store" className="flex justify-center gap-10">
-          <img id="animated-icon" src={Frame97} alt="" />
-          <img src={Frame99} alt="" />
+      <div id="phone_view" className="flex flex-col items-center gap-6 md:gap-10">
+        <div id="play_store" className="flex justify-center gap-6 md:gap-10">
+          <img id="animated-icon" src={Frame97} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" />
+          <img src={Frame99} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" />
         </div>
         <div id="phone_preview" className="flex justify-center">
-          <img src={Group94} alt="" />
+          <img src={Group94} alt="" className="h-32 sm:h-40 md:h-48 lg:h-56" />
         </div>
       </div>
     </div>

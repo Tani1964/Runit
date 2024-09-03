@@ -1,46 +1,69 @@
-.container6{
+.container6 {
     height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    .inner{
-        width: 60%;
-        height: 70%;
-        top: 4878px;
-        left: 364px;
-        border-radius: 12px;
-        background-color: rgba(31, 208, 194, 1);
-        background-image: url('./Assets/Vector 18.png');
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        gap: 20%;
-
-        .heading{
-            width: 480px;
-            height: 122px;
-            top: 136px;
-            left: 320px;
-            font-family: Plus Jakarta Sans;
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 48px;
-            letter-spacing: 0em;
-            text-align: center;
-        }
-
-        .playstore{
-            display: flex;
-            width: 420px;
-            height: 64px;
-            top: 297px;
-            left: 350.0000305175781px;
-            gap: 40px;
-
-
-        }
+    background-color: #f9f9f9; /* Light background color for contrast */
+  }
+  
+  .inner {
+    width: 60%;
+    height: 70%;
+    border-radius: 12px;
+    background-color: rgba(31, 208, 194, 1);
+    background-image: url('../Assets/Vector 18.png'); /* Adjusted path if necessary */
+    background-size: cover; /* Ensure the background image covers the area */
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    gap: 20%;
+    padding: 2rem; /* Add padding for better spacing */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+  }
+  
+  .heading {
+    max-width: 480px;
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Ensure the font is loaded */
+    font-size: 2rem; /* Responsive font size */
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 1rem; /* Add spacing below heading */
+  }
+  
+  .playstore {
+    display: flex;
+    justify-content: center; /* Center images */
+    gap: 2rem; /* Consistent gap between images */
+  }
+  
+  .playstore img {
+    width: 150px; /* Consistent sizing */
+    transition: transform 0.3s ease;
+  }
+  
+  .playstore img:hover {
+    transform: scale(1.05); /* Slight scaling effect on hover */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .inner {
+      width: 80%;
+      height: auto; /* Allow height to adjust */
+      gap: 1.5rem;
     }
-}
+  
+    .heading {
+      font-size: 1.5rem; /* Smaller font size for mobile */
+    }
+  
+    .playstore img {
+      width: 120px; /* Smaller size for mobile */
+    }
+  }
+  
