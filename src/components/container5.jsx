@@ -25,7 +25,7 @@ function showInner(text, arrow) {
 
 function Container5() {
   return (
-    <div className="container5 w-screen">
+    <div className="container5">
       <div className="inner flex gap-6 w-full">
         <div className="heading gap-4">
           <h1 className="font-bold text-5xl">Here’s how it works</h1>
@@ -34,8 +34,8 @@ function Container5() {
             get things done. Follow these simple steps to get started:
           </p>
         </div>
-        <div className="bottom gap-4">
-          <div className="invisible md:visible  ">
+        <div className="bottom gap-4 flex sm:flex-col md:flex-row ">
+          <div className="hidden md:block  ">
             <img className="" src={Frame354} alt="" />
             <img
               className="-translate-y-10 -translate-x-5"
@@ -45,7 +45,7 @@ function Container5() {
           </div>
           <div className="steps pb-20">
             <div className="con shadow-lg p-4 border-2 border-gray-200 rounded-lg">
-              <div className="step flex justify-between">
+              <div className="step flex justify-between ">
                 <div className="flex gap-5">
                   <h1 className="num">01.</h1>
                   <p>Sign Up and Create an Account</p>

@@ -9,28 +9,16 @@ import Footer from "./components/footer";
 
 function App() {
   return (
-    <div id="app ">
-      <div className="absolute w-screen z-20 bg-white overflow-x-clip">
+    <div id="app">
+      <div className="absolute z-20 bg-white">
         <Nav />
       </div>
-      <div className="pt-20">
-        <Container2 />
-      </div>
-      <div>
-        <Container3 />
-      </div>
-      <div>
-        <Container4 />
-      </div>
-      <div>
-        <Container5 />
-      </div>
-      <div>
-        <Container6 />
-      </div>
-      <div>
-        <Container7 />
-      </div>
+      <Container2 />
+      <Container3 />
+      <Container4 />
+      <Container5 />
+      <Container6 />
+      <Container7 />
       <Footer />
     </div>
   );

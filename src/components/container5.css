@@ -36,10 +36,8 @@
   
       .bottom {
         width: 943px;
-        display: grid;
         grid-template-columns: repeat(2, 1fr);
         justify-content: center;
-        gap: 20px;
   
         .image {
           position: relative;
