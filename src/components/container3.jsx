@@ -6,9 +6,9 @@ function Container3(){
         <div id="love">
             <div className="flex flex-col gap-16 justify-center py-24 bg-[#F9F9F9]">
                 <div id="heading" className="flex flex-col text-center justify-center ">
-                    <h1 className="font-bold text-5xl ">Why Our customers love us</h1>
+                    <h1 className="font-bold text-3xl ">Why Our customers love us</h1>
                     <div className="  flex justify-center pt-6"> 
-                    <p className="w-[40%]">At RUNIT TECHNOLOGIES, we pride ourselves on creating a seamless and efficient experience for our users. Here’s why our customers love us:</p>
+                    <p className="w-[40%] text-base">At RUNIT TECHNOLOGIES, we pride ourselves on creating a seamless and efficient experience for our users. Here’s why our customers love us:</p>
                     </div>
                 </div>
                 <div id="cards" className='md:flex px-28 gap-4'>
@@ -19,7 +19,7 @@ function Container3(){
                         
                         <div className="p-2 ">
                             <h4 className="font-bold">Ease</h4>
-                            <p>Create errand requests easily and quickly, with the touch of a button</p>
+                            <p className="font-thin">Create errand requests easily and quickly, with the touch of a button</p>
                         </div>
                         
                     </div>

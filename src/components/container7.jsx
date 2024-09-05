@@ -27,7 +27,7 @@ function Container7(){
         <div className="container7  bg-[#F9F9F6] mb-10 ">
             <div className="inner text-black py-10">
                 <div className="heading">
-                    <h1 className="head text-5xl font-bold">FAQs</h1>
+                    <h1 className="head text-3xl font-bold">FAQs</h1>
                 </div>
                 <div className="bottom h-fit">
                     <div className="steps">

@@ -90,7 +90,7 @@ function Container2() {
           <img src={Frame99} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" />
         </div>
         <div id="phone_preview" className="flex justify-center">
-          <img src={Group94} alt="" className="h-32 sm:h-40 md:h-48 lg:h-56" />
+          <img src={Group94} alt="" className="h-32 sm:h-40 md:h-58 lg:h-56" />
         </div>
       </div>
     </div>

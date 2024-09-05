@@ -28,8 +28,8 @@ function Container5() {
     <div className="container5">
       <div className="inner flex gap-6 w-full">
         <div className="heading gap-4">
-          <h1 className="font-bold text-4xl">Here’s how it works</h1>
-          <p className="text-2xl">
+          <h1 className="font-bold text-3xl">Here’s how it works:</h1>
+          <p className="text-base">
             Our platform connects you with trusted helpers, making it easy to
             get things done. Follow these simple steps to get started:
           </p>
