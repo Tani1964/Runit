@@ -7,7 +7,7 @@ function Container6(){
         <div className="container6">
             <div className="inner">
                 <div className="heading">
-                    <h1 className='text-5xl font-bold'>Running errands has never been easier!</h1>
+                    <h1 className='text-3xl font-bold'>Running errands has never been easier!</h1>
                 </div>
                 <div className="playstore">
                     <img src={Frame97} alt="" />
