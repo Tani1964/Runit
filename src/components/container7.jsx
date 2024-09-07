@@ -24,7 +24,7 @@ function showInner(text, arrow){
 
 function Container7(){
     return(
-        <div className="container7  bg-[#F9F9F6] mb-10 ">
+        <div className="container7  bg-[#F9F9F6] mb-10 py-20">
             <div className="inner text-black py-10">
                 <div className="heading">
                     <h1 className="head text-3xl font-bold">FAQs</h1>

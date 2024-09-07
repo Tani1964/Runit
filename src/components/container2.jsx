@@ -7,6 +7,7 @@ import ShoppingBasket from "../Assets/shopping-basket.png";
 import Frame97 from "../Assets/Frame 97.png";
 import Frame99 from "../Assets/Frame 99.png";
 import Group94 from "../Assets/Group 94.png";
+import Frame350 from "../Assets/Frame_350.png";
 
 function Container2() {
   useEffect(() => {
@@ -42,14 +43,25 @@ function Container2() {
 
   return (
     <div id="container2" className="pt-10 bg-arrow relative">
-      <div id="main" className="flex flex-col md:flex-row px-5 py-4 justify-between items-center mb-10">
+      <div
+        id="main"
+        className="flex flex-col md:flex-row px-5 py-4 justify-between items-center mb-10"
+      >
         <div className="grid w-1/5 hidden md:block">
           <div className="flex justify-end animate-bounce">
-            <img src={Group99} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
+            <img
+              src={Group99}
+              alt=""
+              className="h-auto max-h-12 md:max-h-16 lg:max-h-20"
+            />
           </div>
           <div></div>
           <div className="flex justify-start animate-bounce">
-            <img src={Other16} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
+            <img
+              src={Other16}
+              alt=""
+              className="h-auto max-h-12 md:max-h-16 lg:max-h-20"
+            />
           </div>
         </div>
         <div className="text-center pt-8 md:pt-12">
@@ -69,28 +81,47 @@ function Container2() {
           <div className="mt-6 md:mt-10">
             <p className="text-sm sm:text-base">
               Get the help you need, when you need it! - RUNIT connects you with
-              trusted helpers in <br className="hidden sm:block"/> your community, ready to assist you with
-              your errands!
+              trusted helpers in <br className="hidden sm:block" /> your
+              community, ready to assist you with your errands!
             </p>
           </div>
         </div>
         <div className="grid w-1/5 hidden md:block">
           <div className="flex animate-bounce">
-            <img src={Package} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
+            <img
+              src={Package}
+              alt=""
+              className="h-auto max-h-12 md:max-h-16 lg:max-h-20"
+            />
           </div>
           <div></div>
           <div className="flex justify-end animate-bounce">
-            <img src={ShoppingBasket} alt="" className="h-auto max-h-12 md:max-h-16 lg:max-h-20" />
+            <img
+              src={ShoppingBasket}
+              alt=""
+              className="h-auto max-h-12 md:max-h-16 lg:max-h-20"
+            />
           </div>
         </div>
       </div>
-      <div id="phone_view" className="flex flex-col items-center gap-6 md:gap-10">
+      <div
+        id="phone_view"
+        className="flex flex-col items-center gap-6 md:gap-10 -z-10"
+        style={{ backgroundImage: `url(${Frame350})`,          // Ensures the image covers the whole div
+        backgroundRepeat: 'no-repeat',     // Prevents the image from repeating
+        backgroundPosition: 'center',   }}
+      >
         <div id="play_store" className="flex justify-center gap-6 md:gap-10">
-          <img id="animated-icon" src={Frame97} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" />
+          <img
+            id="animated-icon"
+            src={Frame97}
+            alt=""
+            className="h-10 sm:h-12 md:h-14 lg:h-16"
+          />
           <img src={Frame99} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" />
         </div>
-        <div id="phone_preview" className="flex justify-center">
-          <img src={Group94} alt="" className="h-32 sm:h-40 md:h-58 lg:h-56" />
+        <div id="phone_preview" className="flex justify-center pt-44">
+          <img src={Group94} alt="" className="  translate-y-36 " />
         </div>
       </div>
     </div>

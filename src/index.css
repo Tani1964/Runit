@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 #app{
-    font-family: 'Plus Jakarta Sans', sans-serif;;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #020131;
 }

@@ -3,7 +3,7 @@ import Clock from "../Assets/clock.png"
 
 function Container3(){
     return(
-        <div id="love">
+        <div id="love" className="relative z-10">
             <div className="flex flex-col gap-16 justify-center py-24 bg-[#F9F9F9]">
                 <div id="heading" className="flex flex-col text-center justify-center ">
                     <h1 className="font-bold text-3xl ">Why Our customers love us</h1>

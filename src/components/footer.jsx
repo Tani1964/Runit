@@ -6,7 +6,7 @@ import face from '../Assets/facebook.png';
 
 function Footer() {
   return (
-    <footer className="footer bg-gray-800 text-white py-10 px-4 sm:px-8 md:px-[5%]">
+    <footer className="footer   py-10 px-4 sm:px-8 md:px-[5%]">
       <div className="top flex flex-col md:flex-row justify-between items-start gap-8">
         <div className="socials flex flex-col items-start gap-4">
           <div className="mainlogo">
