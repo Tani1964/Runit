@@ -29,7 +29,7 @@ function Container7(){
                 <div className="heading">
                     <h1 className="head text-3xl font-bold">FAQs</h1>
                 </div>
-                <div className="bottom h-fit">
+                <div className="bottom h-fit pb-10">
                     <div className="steps">
                         <div className="con  shadow-lg p-4 border-2 border-gray-200 rounded-lg bg-white">
                             <div className="step flex justify-between ">
