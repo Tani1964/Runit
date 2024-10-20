@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://runittech.co/",
   "scripts": {
-    "dev": "set HTTPS=true && vite",
+    "dev": " vite",
     "tail": "npx tailwindcss -i ./src/index.css -o ./src/output.css --watch",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
