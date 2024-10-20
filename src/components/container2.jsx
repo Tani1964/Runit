@@ -8,6 +8,8 @@ import Frame97 from "../Assets/Frame 97.png";
 import Frame99 from "../Assets/Frame 99.png";
 import Group94 from "../Assets/Group 94.png";
 import Frame350 from "../Assets/Frame_350.png";
+import { Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 function Container2() {
   useEffect(() => {
@@ -111,14 +113,13 @@ function Container2() {
         backgroundRepeat: 'no-repeat',     // Prevents the image from repeating
         backgroundPosition: 'center',   }}
       >
+       <Button as={Link} to="/runam/onboarding/" bg="#1fd0c2" color="white">
+  GET STARTED
+</Button>
+
         <div id="play_store" className="flex justify-center gap-6 md:gap-10">
-          <img
-            id="animated-icon"
-            src={Frame97}
-            alt=""
-            className="h-10 sm:h-12 md:h-14 lg:h-16"
-          />
-          <img src={Frame99} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" />
+          <img id="animated-icon" src={"Frame97"} alt=""      className="h-10 sm:h-12 md:h-14 lg:h-16"          />
+          {/* <img src={Frame99} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" /> */}
         </div>
         <div id="phone_preview" className="flex justify-center pt-44">
           <img src={Group94} alt="" className="  translate-y-36 " />

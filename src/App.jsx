@@ -1,26 +1,51 @@
-import Nav from "./components/nav";
-import Container2 from "./components/container2";
-import Container3 from "./components/container3";
-import Container4 from "./components/container4";
-import Container5 from "./components/container5";
-import Container6 from "./components/container6";
-import Container7 from "./components/container7";
-import Footer from "./components/footer";
+import LandingPage from "./apps/runam/LandingPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NotFound from "./screens/NotFound";
+import One from "./apps/runam/screens/onboarding/one";
+import Two from "./apps/runam/screens/onboarding/two";
+import Three from "./apps/runam/screens/onboarding/three";
+import ProfileLayout from "./apps/runam/AppLayout";
+import ProfileLayout2 from "./apps/runam/SecLayout";
+import { ChakraProvider } from "@chakra-ui/react";
+import { AuthProvider } from "./context/AuthContext";
+import Signin from "./apps/runam/screens/auth/SignIn";
+import Signup from "./apps/runam/screens/auth/SignUp";
+import Errands from "./apps/runam/screens/errands/Errands"
+import CreateErrand from "./apps/runam/screens/errands/Create";
+import ContinueErrand from "./apps/runam/screens/errands/Continue";
+import HomeScreen from "./apps/runam/screens/errands/Home";
 
 function App() {
   return (
-    <div id="app">
-      <div className="absolute z-20 bg-white">
-        <Nav />
-      </div>
-      <Container2 />
-      <Container3 />
-      <Container4 />
-      <Container5 />
-      <Container6 />
-      <Container7 />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <ChakraProvider>
+        <AuthProvider>
+          <div id="app">
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/runam" element={<LandingPage />} />
+              <Route path="/runam/onboarding/*" element={<ProfileLayout2 />}>
+                <Route index element={<One />} />
+                <Route path="two" element={<Two />} />
+                <Route path="three" element={<Three />} />
+              </Route>
+              <Route path="/runam/auth/*" element={<ProfileLayout2 />}>
+                <Route index element={<Signin />} />
+                <Route path="signin" element={<Signin />} />
+                <Route path="signup" element={<Signup />} />
+              </Route>
+              <Route path="/runam/errands/*" element={<ProfileLayout />}>
+              <Route index element={<HomeScreen />} />
+              <Route path="history" element={<Errands />} />
+              <Route path="create" element={<CreateErrand />} />
+              <Route path="continue" element={<ContinueErrand />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </AuthProvider>
+      </ChakraProvider>
+    </BrowserRouter>
   );
 }
 

@@ -5,25 +5,33 @@
   "type": "module",
   "homepage": "https://runittech.co/",
   "scripts": {
-    "dev": "vite",
+    "dev": "set HTTPS=true && vite",
     "tail": "npx tailwindcss -i ./src/index.css -o ./src/output.css --watch",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
+    "@chakra-ui/icons": "^2.2.4",
+    "@chakra-ui/react": "^2.10.3",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.14.17",
+    "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "framer-motion": "^11.11.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.3.0",
+    "react-router-dom": "^6.27.0",
     "react-scroll": "^1.9.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.45.0",
