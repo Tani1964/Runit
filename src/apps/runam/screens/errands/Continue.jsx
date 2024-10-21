@@ -23,7 +23,7 @@ const ContinueErrand = () => {
   // Provide fallback values in case state is null or undefined
   const {
     requestType = "",
-    pickUp = "",
+    pick_up = "",
     deliverTo = "",
     description = "",
     title = "",
@@ -46,7 +46,7 @@ const ContinueErrand = () => {
       const payload = {
         name: title,
         description,
-        pickUp,
+        pick_up,
         deliver_to: deliverTo,
         bidding_amount: price,
         type: requestType,
@@ -66,7 +66,7 @@ const ContinueErrand = () => {
         duration: 5000,
         isClosable: true,
       });
-      navigate("/");
+      navigate("/runam/errands");
     } catch (error) {
       console.error("Error sending errand:", error);
       toast({

@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateErrand = () => {
   const [requestType, setRequestType] = useState('Solo');
-  const [pickUp, setPickUp] = useState('');
+  const [pick_up, setPickUp] = useState('');
   const [deliverTo, setDeliverTo] = useState('');
   const [description, setDescription] = useState('');
   const [title, setTitle] = useState('');
@@ -23,7 +23,7 @@ const CreateErrand = () => {
   const navigate = useNavigate();
 
   const handleProceed = () => {
-    if (!title || !description || !pickUp || !deliverTo) {
+    if (!title || !description || !pick_up || !deliverTo) {
       toast({
         title: 'Error',
         description: 'Please fill in all fields before proceeding.',
@@ -34,7 +34,7 @@ const CreateErrand = () => {
       return;
     }
     navigate('/runam/errands/continue', {
-      state: { requestType, pickUp, deliverTo, description, title },
+      state: { requestType, pick_up, deliverTo, description, title },
     });
   };
 
@@ -81,7 +81,7 @@ const CreateErrand = () => {
       />
       <Input
         placeholder="Pick up from:"
-        value={pickUp}
+        value={pick_up}
         onChange={(e) => setPickUp(e.target.value)}
         bg="white"
         borderColor="gray.300"
