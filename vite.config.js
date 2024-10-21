@@ -10,7 +10,14 @@ export default defineConfig({
     'process.env': {}, // Useful if some libraries depend on `process.env`
   },
   server: {
-    https: true // or you can pass an options object for custom certificates
+    https: true, // or you can pass an options object for custom certificates
+    proxy: {
+      '/api': {
+        target: 'https://runit-78od.onrender.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   }
 })
 // npm run dev -- --https

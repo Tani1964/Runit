@@ -22,8 +22,10 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../../../../Assets/runamImages/Frame 238.png"
+import { useAuth } from "../../../../context/AuthContext";
 
 const Signin = () => {
+  const { authState } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -35,18 +37,20 @@ const Signin = () => {
     try {
       const response = await axios.post(
         "https://runit-78od.onrender.com/users/login/",
-        formData,
-        { headers: { "Content-Type": "application/json" } }
+        formData
       );
       console.log(response.data)
+      console.log(response.data.tokens.access)
       localStorage.setItem("runitAuthToken", response.data.tokens.access);
+      authState.token = response.data.tokens.access
+      authState.authenticated = true
       toast({
         title: "Login successful.",
         status: "success",
         duration: 3000,
         isClosable: true,
       });
-      navigate("/"); // Navigate to home or dashboard
+      navigate("/runam/errands"); // Navigate to home or dashboard
     } catch (error) {
       const status = error.response?.status || 500;
       let message = "An unexpected error occurred. Please try again.";
@@ -61,7 +65,7 @@ const Signin = () => {
   };
 
   return (
-    <Center minH="100vh" bg="gray.50">
+    <Center minH="100vh" bg="gray.50" color="#010030">
       <Box bg="white" p={8} borderRadius="lg" shadow="md" width="400px">
         <VStack spacing={6} align="stretch">
           <Flex justifyContent={'center'}>

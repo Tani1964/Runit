@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../../../context/AuthContext"; // Assuming you have an AuthContext
+import { useAuth } from "../../../../context/AuthContext"; // Adjust the path if needed
 
 const Errands = () => {
   const navigate = useNavigate();
@@ -19,17 +19,17 @@ const Errands = () => {
   const [requests, setRequests] = useState([]);
   const { authState } = useAuth();
 
+  // Check authentication and redirect if necessary
   const checkAuth = async () => {
     try {
       const auth = await authState.authenticated;
-      if (!auth) {
-        navigate("/runam/onboarding/");
-      }
+      if (!auth) navigate("/runam/onboarding/");
     } catch (error) {
       console.error(error);
     }
   };
 
+  // Fetch tasks and requests from API
   const getTasks = async () => {
     try {
       const headers = {
@@ -67,41 +67,45 @@ const Errands = () => {
         </Heading>
       </Box>
 
-        <VStack spacing={8} align="stretch">
-          {/* Tasks Section */}
-          <Box>
-            <Heading size="md" mb={3}>
-              My Tasks
-            </Heading>
-            <Flex overflowX="auto" gap={4}>
-              {tasks.length > 0 ? (
-                tasks.map((task, index) => (
-                  <TaskCard key={index} />
-                ))
-              ) : (
-                <TaskCard />
-              )}
-            </Flex>
-          </Box>
+      <VStack spacing={8} align="stretch">
+        {/* Tasks Section */}
+        <Box>
+          <Heading size="md" mb={3}>
+            My Tasks
+          </Heading>
+          <Flex overflowX="auto" gap={4}>
+            {tasks.length > 0 ? (
+              tasks.map((task) => <TaskCard key={task.id} task={task} />)
+            ) : (
+              <Text>No tasks available.</Text>
+            )}
+          </Flex>
+        </Box>
 
-          {/* Requests Section */}
-          <Box>
-            <Heading size="md" mb={3}>
-              My Requests
-            </Heading>
-            <Flex overflowX="auto" gap={4}>
-              {requests.map((request, index) => (
-                <RequestCard key={index} />
-              ))}
-            </Flex>
-          </Box>
-        </VStack>
+        {/* Requests Section */}
+        <Box>
+          <Heading size="md" mb={3}>
+            My Requests
+          </Heading>
+          <Flex overflowX="auto" gap={4}>
+            {requests.length > 0 ? (
+              requests.map((request) => (
+                <RequestCard key={request.id} request={request} />
+              ))
+            ) : (
+              <Text>No requests available.</Text>
+            )}
+          </Flex>
+        </Box>
+      </VStack>
     </Box>
   );
 };
 
-// Task Card Component
-const TaskCard = () => (
+export default Errands;
+
+
+const TaskCard = ({ task }) => (
   <Box
     bg="white"
     p={4}
@@ -113,33 +117,43 @@ const TaskCard = () => (
     <HStack align="center" mb={3}>
       <Avatar
         size="md"
-        name="Jane Doe"
-        src="https://randomuser.me/api/portraits/women/44.jpg"
+        name={task.sender_name}
+        backgroundColor={"#010030"}
+        // src={task.image || "https://randomuser.me/api/portraits/men/44.jpg"}
       />
       <VStack align="start" spacing={0} flex={1}>
-        <Text fontWeight="bold">Jane Doe</Text>
+        <Text fontWeight="bold">{task.sender_name}</Text>
+        {/* <Text fontSize="sm" color="gray.500">
+          📍 {task.location}
+        </Text> */}
         <Text fontSize="sm" color="gray.500">
-          📍 New Hall, Unilag
+          📍 {task.status}
         </Text>
       </VStack>
-      <Box bg="orange.100" px={2} py={1} borderRadius="md">
-        <Text fontSize="xs" color="orange.500">
-          Solo
+      <Box
+        bg={task.keywords.includes("Solo") ? "orange.100" : "blue.100"}
+        px={2}
+        py={1}
+        borderRadius="md"
+      >
+        <Text
+          fontSize="xs"
+          color={task.keywords.includes("Solo") ? "orange.500" : "blue.500"}
+        >
+          {task.keywords.length > 0 ? task.keywords.join(", ") : "General"}
         </Text>
       </Box>
     </HStack>
-    <Text mb={2}>
-      Can somebody help me buy food from Mavis and bring it to Moremi, Jollof
-      500, Fried 200, Plantain 700...
-    </Text>
+
+    <Text mb={2}>{task.description}</Text>
+
     <Text fontSize="sm" color="gray.500">
-      📍 Shop 10, Unilag campus
+      💰 ₦{task.bidding_amount}
     </Text>
   </Box>
 );
 
-// Request Card Component
-const RequestCard = () => (
+const RequestCard = ({ request }) => (
   <Box
     bg="white"
     p={4}
@@ -151,13 +165,13 @@ const RequestCard = () => (
     <HStack align="center" mb={3}>
       <Avatar
         size="md"
-        name="Jane Doe"
-        src="https://randomuser.me/api/portraits/women/44.jpg"
+        name={request.sender_name}
+        // src={request.image || "https://randomuser.me/api/portraits/women/44.jpg"}
       />
       <VStack align="start" spacing={0} flex={1}>
-        <Text fontWeight="bold">Jane Doe</Text>
+        <Text fontWeight="bold">{request.sender_name}</Text>
         <Text fontSize="sm" color="gray.500">
-          📍 New Hall, Unilag
+          📍 {request.status}
         </Text>
       </VStack>
       <Box bg="orange.100" px={2} py={1} borderRadius="md">
@@ -166,14 +180,11 @@ const RequestCard = () => (
         </Text>
       </Box>
     </HStack>
-    <Text mb={2}>
-      Who can help me buy pineapple from Onike? Just 200 naira own abeg.
-    </Text>
+
+    <Text mb={2}>{request.description}</Text>
     <Progress value={70} size="xs" colorScheme="orange" mt={2} />
     <Text mt={2} fontSize="xs" color="orange.500">
       12 min left
     </Text>
   </Box>
 );
-
-export default Errands;

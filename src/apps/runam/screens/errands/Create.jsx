@@ -33,7 +33,7 @@ const CreateErrand = () => {
       });
       return;
     }
-    navigate('/errand/continueErrand', {
+    navigate('/runam/errands/continue', {
       state: { requestType, pickUp, deliverTo, description, title },
     });
   };

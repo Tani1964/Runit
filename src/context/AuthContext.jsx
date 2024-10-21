@@ -96,20 +96,20 @@ export const AuthProvider = ({ children }) => {
     }
   }, [authState]);
 
-  // Logout Function
-  const logout = () => {
+  // signout Function
+  const signout = () => {
     try {
       localStorage.removeItem("runitAuthToken");
       localStorage.removeItem("refreshToken");
       setAuthState({ token: null, authenticated: false });
       console.log("Logged out successfully.");
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.error("Error during signout:", error);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ authState, setAuthState, logout }}>
+    <AuthContext.Provider value={{ authState, setAuthState, signout }}>
       {children}
     </AuthContext.Provider>
   );
