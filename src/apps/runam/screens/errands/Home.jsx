@@ -66,6 +66,13 @@ export default function HomeScreen() {
           isClosable: true,
         });
       }
+      toast({
+        title: "Error fetching data.",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
       setLoading(false);
     }
   };
