@@ -169,9 +169,17 @@ const TaskDetails = () => {
     <Box bg="gray.100" minH="100vh" p={5}>
       <Box bg="white" p={5} mb={5} borderRadius="md" boxShadow="md">
         <Heading size="lg">{task.name}</Heading>
+
         <Text color="gray.500" mt={2}>
           Task ID: {task.id}
         </Text>
+        {task.completed ? (
+          <Text mb={2} color={"green"}>
+            Completed!
+          </Text>
+        ) : (
+          <Text mb={2} color={"orange"}>Pending...</Text>
+        )}
       </Box>
 
       <VStack
@@ -190,10 +198,10 @@ const TaskDetails = () => {
           <strong>Category:</strong> {task.category}
         </Text>
         <Text fontSize="md">
-          <strong>Sender's Budget:</strong> ₦{task.bidding_amount}
+          <strong>Sender Name:</strong> {task.sender_name}
         </Text>
         <Text fontSize="md">
-          <strong>Sender Name:</strong> {task.sender_name}
+          <strong>Sender's Budget:</strong> ₦{task.bidding_amount}
         </Text>
         <Text fontSize="md">
           <strong>Status:</strong> {task.is_active ? "Active" : "Inactive"}
@@ -253,19 +261,19 @@ const TaskDetails = () => {
 
         <Flex width={"100%"} direction="row" justify="space-between">
           {/* View Bidders Button */}
-          <Button colorScheme="blue" onClick={handleViewBidders}>
+          {/* <Button colorScheme="blue" onClick={handleViewBidders}>
             View Bidders
-          </Button>
+          </Button> */}
 
           {/* Complete Task Button */}
-          <Button
+          {/* <Button
             colorScheme="green"
             isLoading={completing}
             onClick={completeTask}
             disabled={task.completed} // Disable if task is already completed
           >
-            {task.completed ? "Task Completed" : "Mark as Completed"}
-          </Button>
+            {task.completed ? "Task Completed" : "Mark as Completed"} */}
+          {/* </Button> */}
 
           {/* Navigation Back */}
           <Button colorScheme="blue" onClick={() => navigate(-1)}>

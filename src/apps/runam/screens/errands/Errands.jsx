@@ -74,7 +74,7 @@ const Errands = () => {
           <Heading size="md" mb={3}>
             My Tasks
           </Heading>
-          <Flex overflowX="auto" gap={4}>
+          <Flex  gap={4} width={'90vw'} overflowX={'scroll'} padding={5}>
             {tasks.length > 0 ? (
               tasks.map((task) => <TaskCard key={task.id} task={task} />)
             ) : (
@@ -88,7 +88,7 @@ const Errands = () => {
           <Heading size="md" mb={3}>
             My Requests
           </Heading>
-          <Flex overflowX="auto" gap={4}>
+          <Flex  gap={4} width={'90vw'} overflowX={'scroll'} padding={5}>
             {requests.length > 0 ? (
               requests.map((request) => (
                 <RequestCard key={request.id} request={request} />
@@ -106,7 +106,9 @@ const Errands = () => {
 export default Errands;
 
 
-const TaskCard = ({ task }) => (
+const TaskCard = ({ task }) => {
+  const navigate = useNavigate();
+  return(
   <Box
     bg="white"
     p={4}
@@ -151,8 +153,20 @@ const TaskCard = ({ task }) => (
     <Text fontSize="sm" color="gray.500">
       💰 ₦{task.bidding_amount}
     </Text>
+    <Flex direction={'row'} justify={'space-between'}>
+        {task.completed ? (
+          <Text mb={2} color={"green"}>
+            Completed!
+          </Text>
+        ) : (
+          <Text mb={2} color={"orange"}>Pending...</Text>
+        )}
+        <Button onClick={() => navigate(`/runam/errands/runner/${task.id}`)}>
+          View Task
+        </Button>
+      </Flex>
   </Box>
-);
+)};
 
 const RequestCard = ({ request }) => {
   const navigate = useNavigate();

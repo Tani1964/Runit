@@ -58,7 +58,6 @@ export default function HomeScreen() {
       setLoading(false);
     } catch (error) {
       if (error.response?.status != 401) {
-        
         toast({
           title: "Error fetching data.",
           description: error.message,
@@ -121,8 +120,16 @@ export default function HomeScreen() {
 
   return (
     <VStack spacing={5} align="stretch" p={5}>
+      
       {data.map((item) => (
-        <Box key={item.id} bg="white" p={5} borderRadius="md" shadow="md" mb={4}>
+        <Box
+          key={item.id}
+          bg="white"
+          p={5}
+          borderRadius="md"
+          shadow="md"
+          mb={4}
+        >
           <Flex justify="space-between" align="center">
             <Box>
               <Text fontWeight="bold">{item.sender_name}</Text>
@@ -151,14 +158,19 @@ export default function HomeScreen() {
               ₦{item.bidding_amount}
             </Text>
           </Flex>
+          <Flex direction={'row'} justifyContent={'space-between'}>
 
+          <Button onClick={() => navigate(`/runam/errands/runner/${item.id}`)}>
+            View Task
+          </Button>
           <Button
             colorScheme="teal"
             onClick={() => openBidModal(item)}
             isFullWidth
-          >
-            Create Bid
+            >
+            Create a Bid
           </Button>
+            </Flex>
         </Box>
       ))}
 
