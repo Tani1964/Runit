@@ -6,6 +6,9 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 export default defineConfig({
   plugins: [react(), basicSsl()],
   base: "/",
+  build: {
+    outDir: 'dist', // Default output directory
+  },
   define: {
     'process.env': {}, // Useful if some libraries depend on `process.env`
   },
