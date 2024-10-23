@@ -38,6 +38,8 @@ export default function HomeScreen() {
   const toast = useToast();
   const navigate = useNavigate();
 
+  const [searchQuery, setSearchQuery] = useState("");
+
   const checkAuth = async () => {
     if (!authState.authenticated) {
       navigate("/runam/onboarding/");
@@ -117,6 +119,11 @@ export default function HomeScreen() {
     fetchData();
   }, [authState.token]);
 
+  const filteredData = data.filter((task) =>
+    (task.deliver_to?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    task.pick_up?.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
   if (loading) {
     return (
       <Center h="100vh">
@@ -127,8 +134,15 @@ export default function HomeScreen() {
 
   return (
     <VStack spacing={5} align="stretch" p={5}>
-      
-      {data.map((item) => (
+      {/* Search Bar */}
+      <Input
+        placeholder="Search by location..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        mb={4}
+      />
+
+      {filteredData.map((item) => (
         <Box
           key={item.id}
           bg="white"
