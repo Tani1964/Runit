@@ -21,7 +21,7 @@ import TaskHistory from "./apps/runam/screens/errands/History";
 
 function App() {
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/runam">
       <ChakraProvider>
         <AuthProvider>
           <div id="app">
