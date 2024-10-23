@@ -21,7 +21,7 @@ const Three = () => {
       pb="10%"
     >
       {/* Step Indicators */}
-      <Flex justify="center" w="100%" mt={4}>
+      <Flex justify="center" w="100%" mt={4} px={10} py={5}>
         <Box w="30%" bg="lightgray"  borderRadius="full" />
         <Spacer />
         <Box w="30%"  bg="lightgray"  borderRadius="full" />
@@ -53,7 +53,7 @@ const Three = () => {
           colorScheme="blue"
           onClick={() => handlePress("/runam/auth/")}
         >
-          Sign In &gt;
+          Sign In
         </Button>
       </Flex>
     </Flex>

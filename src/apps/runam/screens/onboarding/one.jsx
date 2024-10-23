@@ -38,7 +38,7 @@ const One = () => {
       pb="10%"
     >
       {/* Step Indicators */}
-      <Flex justify="center" w="100%" mt={4}>
+      <Flex justify="center" w="100%" mt={4} px={10} py={5}>
         <Box w="30%" borderWidth={2} borderRadius="full" borderColor={"teal.500"} />
         <Spacer />
         <Box w="30%" bg="lightgray" borderRadius="full" />
@@ -77,7 +77,7 @@ const One = () => {
           colorScheme="blue"
           onClick={() => handlePress("/runam/onboarding/two")}
         >
-          Next &gt;
+          Next
         </Button>
       </Flex>
     </Flex>

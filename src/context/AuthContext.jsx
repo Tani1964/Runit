@@ -39,8 +39,8 @@ axi.interceptors.response.use(
         if (!refreshToken) throw new Error("No refresh token available");
 
         const { data } = await axios.post(
-          "https://runit-78od.onrender.com/auth/refresh-token",
-          { token: refreshToken }
+          "https://runit-78od.onrender.com/users/token/refresh/",
+          { refresh: refreshToken }
         );
 
         const newAccessToken = data.accessToken;

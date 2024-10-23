@@ -21,7 +21,7 @@ const Two = () => {
       pb="10%"
     >
       {/* Step Indicators */}
-      <Flex justify="center" w="100%" mt={4}>
+      <Flex justify="center" w="100%" mt={4} px={10} py={5}>
         <Box w="30%" bg="lightgray" borderRadius="full" 
          />
         <Spacer />
@@ -59,7 +59,7 @@ const Two = () => {
           colorScheme="blue"
           onClick={() => handlePress("/runam/onboarding/three")}
         >
-          Next &gt;
+          Next
         </Button>
       </Flex>
     </Flex>

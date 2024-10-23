@@ -8,6 +8,7 @@ import {
   Heading,
   VStack,
   HStack,
+  Button,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -153,38 +154,49 @@ const TaskCard = ({ task }) => (
   </Box>
 );
 
-const RequestCard = ({ request }) => (
-  <Box
-    bg="white"
-    p={4}
-    borderRadius="md"
-    boxShadow="md"
-    minW="300px"
-    maxW="300px"
-  >
-    <HStack align="center" mb={3}>
-      <Avatar
-        size="md"
-        name={request.sender_name}
-        // src={request.image || "https://randomuser.me/api/portraits/women/44.jpg"}
-      />
-      <VStack align="start" spacing={0} flex={1}>
-        <Text fontWeight="bold">{request.sender_name}</Text>
-        <Text fontSize="sm" color="gray.500">
-          📍 {request.status}
-        </Text>
-      </VStack>
-      <Box bg="orange.100" px={2} py={1} borderRadius="md">
-        <Text fontSize="xs" color="orange.500">
-          Solo
-        </Text>
-      </Box>
-    </HStack>
+const RequestCard = ({ request }) => {
+  const navigate = useNavigate();
 
-    <Text mb={2}>{request.description}</Text>
-    <Progress value={70} size="xs" colorScheme="orange" mt={2} />
-    <Text mt={2} fontSize="xs" color="orange.500">
-      12 min left
-    </Text>
-  </Box>
-);
+  return (
+    <Box
+      bg="white"
+      p={4}
+      borderRadius="md"
+      boxShadow="md"
+      minW="300px"
+      maxW="300px"
+    >
+      <HStack align="center" mb={3}>
+        <Avatar
+          size="md"
+          name={request.sender_name}
+        />
+        <VStack align="start" spacing={0} flex={1}>
+          <Text fontWeight="bold">{request.sender_name}</Text>
+          <Text fontSize="sm" color="gray.500">
+            📍 {request.status}
+          </Text>
+        </VStack>
+        <Box bg="orange.100" px={2} py={1} borderRadius="md">
+          <Text fontSize="xs" color="orange.500">
+            Solo
+          </Text>
+        </Box>
+      </HStack>
+
+      <Text mb={2}>{request.description}</Text>
+      <Flex direction={'row'} justify={'space-between'}>
+        {request.completed ? (
+          <Text mb={2} color={"green"}>
+            Completed!
+          </Text>
+        ) : (
+          <Text mb={2}></Text>
+        )}
+        <Button onClick={() => navigate(`/runam/errands/${request.id}`)}>
+          View Task
+        </Button>
+      </Flex>
+    </Box>
+  );
+};

@@ -42,6 +42,7 @@ const Signin = () => {
       console.log(response.data)
       console.log(response.data.tokens.access)
       localStorage.setItem("runitAuthToken", response.data.tokens.access);
+      localStorage.setItem("refreshToken", response.data.tokens.refresh)
       authState.token = response.data.tokens.access
       authState.authenticated = true
       toast({

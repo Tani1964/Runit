@@ -15,6 +15,7 @@ import CreateErrand from "./apps/runam/screens/errands/Create";
 import ContinueErrand from "./apps/runam/screens/errands/Continue";
 import HomeScreen from "./apps/runam/screens/errands/Home";
 import Settings from "./apps/runam/screens/settings";
+import TaskDetails from "./apps/runam/screens/errands/TaskDetails";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               </Route>
               <Route path="/runam/errands/*" element={<ProfileLayout />}>
               <Route index element={<HomeScreen />} />
+              <Route path=":id" element={<TaskDetails />} />
               <Route path="history" element={<Errands />} />
               <Route path="create" element={<CreateErrand />} />
               <Route path="continue" element={<ContinueErrand />} />

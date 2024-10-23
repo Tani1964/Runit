@@ -57,9 +57,8 @@ export default function HomeScreen() {
       setData(response.data);
       setLoading(false);
     } catch (error) {
-      if (error.response?.status === 401) {
-        navigate("/runam/auth/signIn");
-      } else {
+      if (error.response?.status != 401) {
+        
         toast({
           title: "Error fetching data.",
           description: error.message,
