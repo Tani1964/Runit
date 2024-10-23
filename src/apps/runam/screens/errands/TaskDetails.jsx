@@ -17,6 +17,7 @@ import {
   useToast,
   Flex,
   Avatar,
+  Image
 } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -221,7 +222,8 @@ const TaskDetails = () => {
         <Text fontSize="md">
           <strong>Paid:</strong> {task.paid ? "Yes" : "No"}
         </Text>
-
+        <Image src={task.image}/>
+        
         {/* Assigned User Email */}
         {assignedUser && (
           <Text fontSize="md" color="green.600">
@@ -252,6 +254,7 @@ const TaskDetails = () => {
                         <Text>Name: {bidder.user}</Text>
                         <Text>Bid Amount: ₦{bidder.price}</Text>
                         <Text>Proposal: {bidder.message}</Text>
+                        {/* <Text>Contact: {bidder.email}</Text> */}
                         <Button
                           colorScheme="green"
                           mt={2}

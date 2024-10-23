@@ -58,8 +58,7 @@ const Signup = () => {
     } catch (error) {
       const status = error.response?.status || 500;
       let message = "An error occurred. Please try again.";
-      if (status === 409) message = "Email already exists. Please sign in.";
-      else if (status === 400) message = "Invalid input. Check your data.";
+      if (status === 409 || status === 400) message = "Email already exists. Please sign in.";
       else message = "Network error. Please check your connection.";
       setError(message);
     } finally {
@@ -68,7 +67,7 @@ const Signup = () => {
   };
 
   return (
-    <Center minH="100vh" bg="gray.50">
+    <Center minH="100vh" bg="gray.50" color="#010030">
       <Box bg="white" p={8} borderRadius="lg" shadow="md" width="400px">
         <VStack spacing={6} align="stretch">
           <Flex justifyContent={"center"}>

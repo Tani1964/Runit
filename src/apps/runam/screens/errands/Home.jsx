@@ -97,7 +97,7 @@ export default function HomeScreen() {
     } catch (error) {
       toast({
         title: "Error creating bid.",
-        description: error.message,
+        description: error.response.data.Error,
         status: "error",
         duration: 5000,
         isClosable: true,

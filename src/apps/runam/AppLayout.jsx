@@ -59,6 +59,9 @@ const ProfileLayout = () => {
             <Link to="/runam/errands" style={{ marginRight: "20px" }}>
               Home
             </Link>
+            <Link to="/runam/errands/pending" style={{ marginRight: "20px" }}>
+              Pending Tasks
+            </Link>
             <Link to="/runam/errands/history" style={{ marginRight: "20px" }}>
               History
             </Link>
@@ -85,6 +88,9 @@ const ProfileLayout = () => {
             >
               <Link to="/runam/errands" style={{ padding: "10px 0" }}>
                 Home
+              </Link>
+              <Link to="/runam/errands/pending" style={{ padding: "10px 0" }}>
+                Pending Tasks
               </Link>
               <Link to="/runam/errands/history" style={{ padding: "10px 0" }}>
                 History

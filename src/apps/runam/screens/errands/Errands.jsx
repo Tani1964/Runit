@@ -64,7 +64,7 @@ const Errands = () => {
       {/* Header */}
       <Box bg="white" p={5} mb={5} borderRadius="md" boxShadow="md">
         <Heading textAlign="center" mb={3}>
-          Errands
+          Pending Errands
         </Heading>
       </Box>
 
