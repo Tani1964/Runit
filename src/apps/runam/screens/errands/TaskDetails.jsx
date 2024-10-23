@@ -16,6 +16,7 @@ import {
   useDisclosure,
   useToast,
   Flex,
+  Avatar,
 } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -36,7 +37,8 @@ const TaskDetails = () => {
   const [loadingBidders, setLoadingBidders] = useState(false);
   const [errorBidders, setErrorBidders] = useState(null);
   const [assigning, setAssigning] = useState(false);
-  const [completing, setCompleting] = useState(false); // New state for marking task as completed
+  const [completing, setCompleting] = useState(false); // State for marking task as completed
+  const [assignedUser, setAssignedUser] = useState(null); // State for assigned user
 
   // Fetch task by ID
   const fetchTask = async () => {
@@ -64,13 +66,25 @@ const TaskDetails = () => {
         "Content-Type": "application/json",
       };
       const response = await axi.get(`/tasks/${id}/bidders/`, { headers });
-
-      
       setBidders(response.data.Bidders);
     } catch (err) {
       setErrorBidders("Failed to load bidders");
     } finally {
       setLoadingBidders(false);
+    }
+  };
+
+  // Fetch all users and match with the bidder
+  const fetchAndAssignUser = async (bidderId) => {
+    try {
+      const userResponse = await axi.get("https://runit-78od.onrender.com/users/all/");
+      const users = userResponse.data;
+
+      // Match the user by username and assign the email
+      const assignedUser = users.find((user) => user.username === bidderId);
+      setAssignedUser(assignedUser ? assignedUser.email : null);
+    } catch (err) {
+      console.error("Failed to fetch users", err);
     }
   };
 
@@ -93,6 +107,7 @@ const TaskDetails = () => {
         duration: 3000,
         isClosable: true,
       });
+      fetchAndAssignUser(bidderId); // Fetch user data after assigning task
       onClose();
     } catch (err) {
       toast({
@@ -121,7 +136,6 @@ const TaskDetails = () => {
         duration: 3000,
         isClosable: true,
       });
-      // Optionally, update task state to reflect completion
       setTask({ ...task, completed: true });
     } catch (err) {
       toast({
@@ -208,6 +222,13 @@ const TaskDetails = () => {
           <strong>Paid:</strong> {task.paid ? "Yes" : "No"}
         </Text>
 
+        {/* Assigned User Email */}
+        {assignedUser && (
+          <Text fontSize="md" color="green.600">
+            <strong>Assigned User Email:</strong> {assignedUser}
+          </Text>
+        )}
+
         {/* Modal for Bidders */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -222,20 +243,25 @@ const TaskDetails = () => {
               ) : bidders.length > 0 ? (
                 bidders.map((bidder, index) => (
                   <Box key={index} p={3} borderBottom="1px solid #e0e0e0">
-                    <Text>
-                      <strong>Bidder {index + 1}</strong>
-                    </Text>
-                    <Text>Name: {bidder.user}</Text>
-                    <Text>Bid Amount: ₦{bidder.price}</Text>
-                    <Text>Proposal: {bidder.message}</Text>
-                    <Button
-                      colorScheme="green"
-                      mt={2}
-                      isLoading={assigning}
-                      onClick={() => assignTask(bidder.user)}
-                    >
-                      Assign Task
-                    </Button>
+                    <Flex align="center">
+                      <Avatar size="sm" mr={3} />
+                      <Box>
+                        <Text>
+                          <strong>Bidder {index + 1}</strong>
+                        </Text>
+                        <Text>Name: {bidder.user}</Text>
+                        <Text>Bid Amount: ₦{bidder.price}</Text>
+                        <Text>Proposal: {bidder.message}</Text>
+                        <Button
+                          colorScheme="green"
+                          mt={2}
+                          isLoading={assigning}
+                          onClick={() => assignTask(bidder.user)}
+                        >
+                          Assign Task
+                        </Button>
+                      </Box>
+                    </Flex>
                   </Box>
                 ))
               ) : (
@@ -251,27 +277,24 @@ const TaskDetails = () => {
           </ModalContent>
         </Modal>
 
-        <Flex width={"100%"} direction="row" justify="space-between">
-          {/* View Bidders Button */}
-          <Button colorScheme="blue" onClick={handleViewBidders}>
-            View Bidders
-          </Button>
+        {/* Actions */}
+        <Button
+          colorScheme="blue"
+          onClick={handleViewBidders}
+          isLoading={loadingBidders}
+        >
+          View Bidders
+        </Button>
 
-          {/* Complete Task Button */}
+        {!task.completed && (
           <Button
             colorScheme="green"
             isLoading={completing}
             onClick={completeTask}
-            disabled={task.completed} // Disable if task is already completed
           >
-            {task.completed ? "Task Completed" : "Mark as Completed"}
+            Mark Task as Completed
           </Button>
-
-          {/* Navigation Back */}
-          <Button colorScheme="blue" onClick={() => navigate(-1)}>
-            Go Back
-          </Button>
-        </Flex>
+        )}
       </VStack>
     </Box>
   );

@@ -20,18 +20,21 @@ const Settings = () => {
   const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [formData, setFormData] = useState({
     bio: "",
     phone_number: "",
     location: "",
     avatar: "",
   });
+  const [newAvatar, setNewAvatar] = useState(null); // To store the new avatar
   const toast = useToast();
 
-  // Fetch User Profile
+  // Fetch User Profile and Avatar
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(
+      // Fetch profile details
+      const profileResponse = await axios.get(
         "https://runit-78od.onrender.com/users/profile/",
         {
           headers: {
@@ -39,12 +42,23 @@ const Settings = () => {
           },
         }
       );
-      setProfile(response.data);
+
+      // Fetch profile avatar
+      const avatarResponse = await axios.get(
+        "https://runit-78od.onrender.com/users/profile/avatar/",
+        {
+          headers: {
+            Authorization: `Bearer ${authState.token}`,
+          },
+        }
+      );
+
+      setProfile(profileResponse.data);
       setFormData({
-        bio: response.data.bio || "",
-        phone_number: response.data.phone_number || "",
-        location: response.data.location || "",
-        avatar: response.data.avatar || "",
+        bio: profileResponse.data.bio || "",
+        phone_number: profileResponse.data.phone_number || "",
+        location: profileResponse.data.location || "",
+        avatar: avatarResponse.data.avatar || "",
       });
     } catch (error) {
       toast({
@@ -92,10 +106,54 @@ const Settings = () => {
     }
   };
 
+  // Upload New Avatar
+  const uploadAvatar = async () => {
+    if (!newAvatar) return;
+
+    const formData = new FormData();
+    formData.append("avatar", newAvatar);
+
+    setIsUploadingAvatar(true);
+    try {
+      const response = await axios.put(
+        "https://runit-78od.onrender.com/users/profile/avatar/",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${authState.token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      setFormData((prevData) => ({ ...prevData, avatar: response.data.avatar }));
+      toast({
+        title: "Avatar updated successfully.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Error updating avatar.",
+        description: "Please try again later.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setIsUploadingAvatar(false);
+    }
+  };
+
   // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  // Handle avatar file selection
+  const handleAvatarChange = (e) => {
+    setNewAvatar(e.target.files[0]);
   };
 
   useEffect(() => {
@@ -117,6 +175,20 @@ const Settings = () => {
 
         <VStack spacing={4} align="stretch" bg="white" p={8} borderRadius="md" boxShadow="md">
           <Avatar size="xl" src={formData.avatar} name={profile?.my_referral_code?.user.username} />
+
+          <FormControl>
+            <FormLabel>Update Avatar</FormLabel>
+            <Input type="file" accept="image/*" onChange={handleAvatarChange} />
+            <Button
+              mt={2}
+              colorScheme="blue"
+              isLoading={isUploadingAvatar}
+              onClick={uploadAvatar}
+              disabled={!newAvatar}
+            >
+              Upload Avatar
+            </Button>
+          </FormControl>
 
           <FormControl>
             <FormLabel>Username</FormLabel>
