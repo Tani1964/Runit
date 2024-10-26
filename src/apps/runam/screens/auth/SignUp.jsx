@@ -67,15 +67,12 @@ const Signup = () => {
   };
 
   return (
-    <Center minH="100vh" bg="gray.50" color="#010030">
-      <Box bg="white" p={8} borderRadius="lg" shadow="md" width="400px">
+    <Center maxH="100vh" bg="gray.50" color="#010030">
+      <Box bg="white" p={8} borderRadius="lg" shadow="md" width={["80vw","70vw", "30vw"]}>
         <VStack spacing={6} align="stretch">
           <Flex justifyContent={"center"}>
             <Image src={Logo} alt="Logo" width="30%" mb={6} />
           </Flex>
-          <Heading size="lg" textAlign="center">
-            Ready to Pitch your Ideas?
-          </Heading>
           <Text color="gray.500" textAlign="center">
             Enter your details to create your account
           </Text>

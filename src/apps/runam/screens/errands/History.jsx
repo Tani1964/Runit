@@ -79,7 +79,7 @@ const TaskHistory = () => {
         <Tabs variant="enclosed">
           <TabList>
             <Tab>As Sender</Tab>
-            <Tab>As Erandee</Tab>
+            <Tab>As Runner</Tab>
           </TabList>
 
           <TabPanels>

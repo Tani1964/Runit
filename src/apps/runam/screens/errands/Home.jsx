@@ -57,7 +57,6 @@ export default function HomeScreen() {
         { headers }
       );
       setData(response.data);
-      setLoading(false);
     } catch (error) {
       if (error.response?.status != 401) {
         toast({
@@ -75,6 +74,7 @@ export default function HomeScreen() {
         duration: 5000,
         isClosable: true,
       });
+    }finally{ 
       setLoading(false);
     }
   };

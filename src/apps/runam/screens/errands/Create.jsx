@@ -48,7 +48,7 @@ const CreateErrand = () => {
       </Text>
 
       {/* Request Type Buttons */}
-      <HStack spacing={4} justify="center">
+      {/* <HStack spacing={4} justify="center">
         {['Solo', 'Group'].map((type) => (
           <Button
             key={type}
@@ -60,7 +60,7 @@ const CreateErrand = () => {
             {type}
           </Button>
         ))}
-      </HStack>
+      </HStack> */}
 
       {/* Text Inputs */}
       <Textarea

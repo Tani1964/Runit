@@ -1,7 +1,9 @@
 import "./container6.css";
 import Frame97 from "../Assets/Frame 97.png";
 import Frame99 from "../Assets/Frame 99.png";
-import { Link, Button } from "@chakra-ui/react";
+import {  Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
 
 function Container6() {
   return (

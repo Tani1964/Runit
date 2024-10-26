@@ -109,16 +109,23 @@ function Container2() {
       <div
         id="phone_view"
         className="flex flex-col items-center gap-6 md:gap-10 -z-10"
-        style={{ backgroundImage: `url(${Frame350})`,          // Ensures the image covers the whole div
-        backgroundRepeat: 'no-repeat',     // Prevents the image from repeating
-        backgroundPosition: 'center',   }}
+        style={{
+          backgroundImage: `url(${Frame350})`, // Ensures the image covers the whole div
+          backgroundRepeat: "no-repeat", // Prevents the image from repeating
+          backgroundPosition: "center",
+        }}
       >
-       <Button as={Link} to="/runam/onboarding/" bg="#1fd0c2" color="white">
-  GET STARTED
-</Button>
+        <Button as={Link} to="/runam/onboarding/" bg="#1fd0c2" color="white">
+          GET STARTED
+        </Button>
 
         <div id="play_store" className="flex justify-center gap-6 md:gap-10">
-          <img id="animated-icon" src={"Frame97"} alt=""      className="h-10 sm:h-12 md:h-14 lg:h-16"          />
+          <img
+            id="animated-icon"
+            src={"Frame97"}
+            alt=""
+            className="h-10 sm:h-12 md:h-14 lg:h-16"
+          />
           {/* <img src={Frame99} alt="" className="h-10 sm:h-12 md:h-14 lg:h-16" /> */}
         </div>
         <div id="phone_preview" className="flex justify-center pt-44">

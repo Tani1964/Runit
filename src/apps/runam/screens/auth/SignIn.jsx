@@ -66,8 +66,8 @@ const Signin = () => {
   };
 
   return (
-    <Center minH="100vh" bg="gray.50" color="#010030">
-      <Box bg="white" p={8} borderRadius="lg" shadow="md" width="400px">
+    <Center maxH="100vh" bg="gray.50" color="#010030">
+      <Box bg="white" p={8} borderRadius="lg" shadow="md" width={["80vw","70vw", "30vw"]}>
         <VStack spacing={6} align="stretch">
           <Flex justifyContent={'center'}>
 
