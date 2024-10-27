@@ -38,12 +38,12 @@ const ProfileLayout = () => {
   };
 
   return (
-    <Box>
+    <Box maxW={'100%'}>
       <Flex
         as="header"
         justifyContent="space-between"
         alignItems="center"
-        p={4}
+        p={2}
         bg="teal.500"
         color="white"
       >
