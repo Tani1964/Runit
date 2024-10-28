@@ -87,7 +87,7 @@ axi.interceptors.response.use(
 // Auth Provider Component
 export const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
-    token: null,
+    token: localStorage.getItem("runitAuthToken"),
     authenticated: false,
   });
 
@@ -113,6 +113,7 @@ export const AuthProvider = ({ children }) => {
 
   // Update Axios Headers When Auth State Changes
   useEffect(() => {
+
     if (authState.token) {
       axi.defaults.headers.common["Authorization"] = `Bearer ${authState.token}`;
     } else {

@@ -10,6 +10,9 @@ import {
   useToast,
   Flex,
   Spacer,
+  Tag,
+  TagLabel,
+  TagCloseButton,
 } from "@chakra-ui/react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext"; // Adjust path as needed
@@ -20,7 +23,6 @@ const ContinueErrand = () => {
   const toast = useToast();
   const { authState } = useAuth();
 
-  // Provide fallback values in case state is null or undefined
   const {
     requestType = "",
     pick_up = "",
@@ -34,6 +36,8 @@ const ContinueErrand = () => {
   const [selectedTip, setSelectedTip] = useState(null);
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [keywords, setKeywords] = useState([]); // Array to hold keywords
+  const [keywordInput, setKeywordInput] = useState("");
 
   const predefinedTips = [100, 500, 1000];
   const total = parseFloat(price || 0) + parseFloat(tip || 0);
@@ -41,7 +45,7 @@ const ContinueErrand = () => {
   // Handle file selection
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file && file.size > 1048576) { // 1MB limit
+    if (file && file.size > 1048576) {
       toast({
         title: "Image Too Large",
         description: "Image size should not exceed 1 MB.",
@@ -55,9 +59,22 @@ const ContinueErrand = () => {
     }
   };
 
+  // Add a keyword to the list
+  const addKeyword = () => {
+    if (keywordInput.trim() && !keywords.includes(keywordInput.trim())) {
+      setKeywords([...keywords, keywordInput.trim()]);
+      setKeywordInput("");
+    }
+  };
+
+  // Remove a keyword from the list
+  const removeKeyword = (keyword) => {
+    setKeywords(keywords.filter((k) => k !== keyword));
+  };
+
   // Upload image to the task
   const handleImageUpload = async (taskId) => {
-    if (!image) return; // If no image is selected, return early
+    if (!image) return;
 
     const formData = new FormData();
     formData.append("image", image);
@@ -68,7 +85,7 @@ const ContinueErrand = () => {
         "Content-Type": "multipart/form-data",
       };
 
-      const response = await axios.post(
+      await axios.post(
         `https://runit-78od.onrender.com/tasks/${taskId}/add-image/`,
         formData,
         { headers }
@@ -108,6 +125,7 @@ const ContinueErrand = () => {
         deliver_to: deliverTo,
         bidding_amount: price,
         type: requestType,
+        keywords, // Include keywords in the payload
       };
 
       const response = await axios.post(
@@ -116,11 +134,9 @@ const ContinueErrand = () => {
         { headers }
       );
 
-      const taskId = response.data.id; // Assuming the task ID is returned in the response
-      console.log("Errand sent successfully:", response.data);
-
+      const taskId = response.data.id;
       if (image) {
-        await handleImageUpload(taskId); // Upload image if there's one selected
+        await handleImageUpload(taskId);
       }
 
       toast({
@@ -201,6 +217,32 @@ const ContinueErrand = () => {
           bg="white"
         />
         {image && <Text>{image.name}</Text>}
+
+        <VStack align="start" w="full">
+          <Text fontWeight="bold" fontSize="md">
+            Keywords
+          </Text>
+          <HStack spacing={2} wrap="wrap">
+            {keywords.map((keyword, index) => (
+              <Tag key={index} size="md" colorScheme="teal" borderRadius="full">
+                <TagLabel>{keyword}</TagLabel>
+                <TagCloseButton onClick={() => removeKeyword(keyword)} />
+              </Tag>
+            ))}
+          </HStack>
+          <HStack w="full">
+            <Input
+              placeholder="Add a keyword and press enter"
+              value={keywordInput}
+              onChange={(e) => setKeywordInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && addKeyword()}
+              bg="white"
+            />
+            <Button onClick={addKeyword} colorScheme="teal">
+              Add
+            </Button>
+          </HStack>
+        </VStack>
 
         <Button
           colorScheme="teal"

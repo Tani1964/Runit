@@ -25,7 +25,7 @@ const scrollVariant = {
 
 function LandingPage() {
   return (
-    <div>
+    <div className="overflow-x-clip">
       {/* Keep the header's original styling */}
       <div className="absolute z-20 bg-white">
         <Nav />
@@ -68,6 +68,7 @@ function LandingPage() {
         viewport={{ once: true }}
         variants={scrollVariant}
         mb={8}
+        // ml={20}
       >
         <Container5 />
       </MotionBox>

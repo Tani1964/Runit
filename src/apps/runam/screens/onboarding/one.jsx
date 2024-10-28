@@ -11,8 +11,7 @@ const One = () => {
 
   const checkAuth = async () => {
     try {
-      const auth = await authState.authenticated;
-      if (auth) {
+      if (localStorage.getItem("runitAuthToken")) {
         navigate("/runam/errands/");
       }
     } catch (error) {

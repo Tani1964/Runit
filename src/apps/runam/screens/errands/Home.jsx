@@ -58,23 +58,27 @@ export default function HomeScreen() {
       );
       setData(response.data);
     } catch (error) {
-      if (error.response?.status != 401) {
-        toast({
-          title: "Error fetching data.",
-          description: error.message,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+      // console.log(error.response?.status )
+      if (error.response?.status == 401) {
+        localStorage.removeItem("runitAuthToken");
+        localStorage.removeItem("refreshToken");
+        navigate("/");
+        // toast({
+        //   title: "Error fetching data.",
+        //   description: error.message,
+        //   status: "error",
+        //   duration: 5000,
+        //   isClosable: true,
+        // });
       }
-      toast({
-        title: "Error fetching data.",
-        description: error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
-    }finally{ 
+      // toast({
+      //   title: "Error fetching data.",
+      //   description: error.message,
+      //   status: "error",
+      //   duration: 5000,
+      //   isClosable: true,
+      // });
+    } finally {
       setLoading(false);
     }
   };
@@ -119,9 +123,10 @@ export default function HomeScreen() {
     fetchData();
   }, [authState.token]);
 
-  const filteredData = data.filter((task) =>
-    (task.deliver_to?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    task.pick_up?.toLowerCase().includes(searchQuery.toLowerCase()))
+  const filteredData = data.filter(
+    (task) =>
+      task.deliver_to?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      task.pick_up?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (loading) {
@@ -179,19 +184,23 @@ export default function HomeScreen() {
               ₦{item.bidding_amount}
             </Text>
           </Flex>
-          <Flex direction={'row'} justifyContent={'space-between'}>
-
-          <Button onClick={() => navigate(`/runam/errands/runner/${item.id}`)}>
-            View Task
-          </Button>
-          <Button
-            colorScheme="teal"
-            onClick={() => openBidModal(item)}
-            isFullWidth
+          {item.keywords.map((keyword) => {
+            <Tag>{keyword.toLowerCase()}</Tag>;
+          })}
+          <Flex direction={"row"} justifyContent={"space-between"}>
+            <Button
+              onClick={() => navigate(`/runam/errands/runner/${item.id}`)}
             >
-            Create a Bid
-          </Button>
-            </Flex>
+              View Task
+            </Button>
+            <Button
+              colorScheme="teal"
+              onClick={() => openBidModal(item)}
+              isFullWidth
+            >
+              Create a Bid
+            </Button>
+          </Flex>
         </Box>
       ))}
 

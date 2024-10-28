@@ -11,6 +11,8 @@ import {
   Button,
   useToast,
   Spinner,
+  Flex,
+  Text
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useAuth } from "../../../../context/AuthContext"; // Assuming AuthContext is set up
@@ -228,7 +230,9 @@ const Settings = () => {
               placeholder="Enter your location"
             />
           </FormControl>
-
+          <Flex>
+            <Text>Referral Code: {profile.my_referral_code.code}</Text>
+          </Flex>
           <Button
             colorScheme="teal"
             isLoading={isSaving}

@@ -7,7 +7,6 @@ import {
   InputGroup,
   InputRightElement,
   Image,
-  Heading,
   Text,
   VStack,
   Flex,
@@ -26,6 +25,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
+  const [referralCode, setReferralCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [error, setError] = useState("");
@@ -52,6 +52,7 @@ const Signup = () => {
         username: fullName,
         password,
         password2: password,
+        referralCode,
       });
 
       navigate("/runam/auth/signin");
@@ -101,6 +102,15 @@ const Signup = () => {
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel>Referral Code</FormLabel>
+              <Input
+                placeholder="Enter referral code (optional)"
+                value={referralCode}
+                onChange={(e) => setReferralCode(e.target.value)}
               />
             </FormControl>
 
