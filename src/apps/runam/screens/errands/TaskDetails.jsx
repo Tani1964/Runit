@@ -40,6 +40,7 @@ const TaskDetails = () => {
   const [assigning, setAssigning] = useState(false);
   const [completing, setCompleting] = useState(false); // State for marking task as completed
   const [assignedUser, setAssignedUser] = useState(null); // State for assigned user
+  const [bidderDetails, setBidderDetails] = useState({})
 
   // Fetch task by ID
   const fetchTask = async () => {
@@ -74,6 +75,12 @@ const TaskDetails = () => {
       setLoadingBidders(false);
     }
   };
+
+  const getBidderDetials = () => {
+    try{
+
+    }catch{}
+  }
 
   // Fetch all users and match with the bidder
   const fetchAndAssignUser = async (bidderId) => {
