@@ -76,10 +76,12 @@ const TaskDetails = () => {
     }
   };
 
-  const getBidderDetials = () => {
+  const getBidderDetials = async() => {
     try{
-
-    }catch{}
+      const p = "pjjj"
+    }catch(err){
+      throw(err)
+    }
   }
 
   // Fetch all users and match with the bidder
