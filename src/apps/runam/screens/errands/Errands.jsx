@@ -67,7 +67,13 @@ const Errands = () => {
   }, [authState.token]);
 
   return (
-    <Box bg="gray.100" minH="85vh" maxH={["100vh", "200vh"]} p={5} maxW={["90vw", "93vw", "100vw"]}>
+    <Box
+      bg="gray.100"
+      minH="85vh"
+      maxH={["100vh", "200vh"]}
+      p={5}
+      maxW={["90vw", "93vw", "100vw"]}
+    >
       {/* Header */}
       <Box bg="white" p={5} mb={5} borderRadius="md" boxShadow="md">
         <Heading textAlign="center" mb={3}>
@@ -117,7 +123,9 @@ const Errands = () => {
               {loadingRequests ? (
                 <Spinner size="lg" color="green.500" />
               ) : requests.length > 0 ? (
-                requests.map((request) => <RequestCard key={request.id} request={request} />)
+                requests.map((request) => (
+                  <RequestCard key={request.id} request={request} />
+                ))
               ) : (
                 <Text>No requests available.</Text>
               )}
@@ -134,7 +142,17 @@ export default Errands;
 const TaskCard = ({ task }) => {
   const navigate = useNavigate();
   return (
-    <Box bg="white" p={4} borderRadius="md" boxShadow="md" minW="300px" maxW="300px" display={'flex'} flexDirection={'column'} justifyContent={'space-between'}>
+    <Box
+      bg="white"
+      p={4}
+      borderRadius="md"
+      boxShadow="md"
+      minW="300px"
+      maxW="300px"
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+    >
       <HStack align="center" mb={3}>
         <Avatar size="md" name={task.sender_name} backgroundColor={"#010030"} />
         <VStack align="start" spacing={0} flex={1}>
@@ -157,11 +175,12 @@ const TaskCard = ({ task }) => {
           </Text>
         </Box>
       </HStack>
-<>
-      <Text mb={2}>{task.name}</Text>
-      <Text fontSize="sm" color="gray.500">
-        💰 ₦{task.bidding_amount}
-      </Text></>
+      <>
+        <Text mb={2}>{task.name}</Text>
+        <Text fontSize="sm" color="gray.500">
+          💰 ₦{task.bidding_amount}
+        </Text>
+      </>
       <Flex direction={"row"} justify={"space-between"}>
         {task.completed ? (
           <Text mb={2} color={"green"}>
@@ -172,9 +191,16 @@ const TaskCard = ({ task }) => {
             Pending...
           </Text>
         )}
-        <Button onClick={() => navigate(`/runam/errands/runner/${task.id}`)}>
-          View Task
-        </Button>
+        <Box
+          borderWidth={2}
+          borderColor={"#0a1016"}
+          width={"fit-content"}
+          borderRadius={9}
+        >
+          <Button onClick={() => navigate(`/runam/errands/runner/${task.id}`)}>
+            View Task
+          </Button>
+        </Box>
       </Flex>
     </Box>
   );
@@ -183,7 +209,17 @@ const TaskCard = ({ task }) => {
 const RequestCard = ({ request }) => {
   const navigate = useNavigate();
   return (
-    <Box bg="white" p={4} borderRadius="md" boxShadow="md" minW="300px" maxW="300px" display={'flex'} flexDirection={'column'} justifyContent={'space-between'}>
+    <Box
+      bg="white"
+      p={4}
+      borderRadius="md"
+      boxShadow="md"
+      minW="300px"
+      maxW="300px"
+      display={"flex"}
+      flexDirection={"column"}
+      justifyContent={"space-between"}
+    >
       <HStack align="center" mb={3}>
         <Avatar size="md" name={request.sender_name} />
         <VStack align="start" spacing={0} flex={1}>
@@ -208,9 +244,16 @@ const RequestCard = ({ request }) => {
         ) : (
           <Text mb={2}></Text>
         )}
-        <Button onClick={() => navigate(`/runam/errands/${request.id}`)}>
-          View Task
-        </Button>
+        <Box
+          borderWidth={2}
+          borderColor={"#0a1016"}
+          width={"fit-content"}
+          borderRadius={9}
+        >
+          <Button onClick={() => navigate(`/runam/errands/${request.id}`)}>
+            View Task
+          </Button>
+        </Box>
       </Flex>
     </Box>
   );

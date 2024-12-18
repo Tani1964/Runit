@@ -9,7 +9,7 @@ const ProfileLayout = () => {
 
 
   return (
-    <Box>
+    <Box  color={'#0a1016'}>
       <Flex
         as="header"
         justifyContent="space-between"

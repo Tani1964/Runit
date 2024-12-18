@@ -120,13 +120,15 @@ const HomeScreen = () => {
   }
 
   return (
-    <Box spacing={5} align="stretch" bgColor={'gray.50'} p={5}>
-      <TaskSlider visibility={['none']}/>
+    <Box spacing={5} align="stretch" bgColor={"gray.50"} p={5}>
+      <TaskSlider visibility={["none"]} />
       <Input
         placeholder="Search by location..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         mb={4}
+        colorScheme="#0a1016"
+        color="#0a1016"
       />
       <Grid
         width={"85vw"}
@@ -139,12 +141,13 @@ const HomeScreen = () => {
             bg="white"
             width={["80vw", "85vw", "30vw"]}
             p={5}
-            borderRadius="md"
+            borderRadius="lg"
             shadow="md"
             mb={4}
-            display={'flex'}
-            flexDirection={'column'}
-            justifyContent={'space-between'}
+            boxShadow="0 4px 6px rgba(10, 16, 22,0.1)"
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"space-between"}
           >
             <Flex justify="space-between" align="center">
               <Box>
@@ -176,17 +179,31 @@ const HomeScreen = () => {
               </Flex>
             </>
             <Flex justifyContent="space-between">
-              <Button
-                onClick={() => navigate(`/runam/errands/runner/${item.id}`)}
+              <Box
+                borderWidth={2}
+                borderColor={"#0a1016"}
+                width={"fit-content"}
+                borderRadius={9}
               >
-                View Task
-              </Button>
-              <Button
-                colorScheme="blue"
-                onClick={() => setSelectedTask(item) || onOpen()}
+                <Button
+                  onClick={() => navigate(`/runam/errands/runner/${item.id}`)}
+                >
+                  View Task
+                </Button>
+              </Box>
+              <Box
+                borderWidth={2}
+                borderColor={"#0a1016"}
+                width={"fit-content"}
+                borderRadius={9}
               >
-                Create a Bid
-              </Button>
+                <Button
+                  colorScheme="blue"
+                  onClick={() => setSelectedTask(item) || onOpen()}
+                >
+                  Create a Bid
+                </Button>
+              </Box>
             </Flex>
           </GridItem>
         ))}

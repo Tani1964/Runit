@@ -58,7 +58,7 @@ const ProfileLayout = () => {
   };
 
   return (
-    <Box maxW="100%" onClick={handleOutsideClick}>
+    <Box maxW="100%" onClick={handleOutsideClick} color={'#0a1016'}>
       <Flex
         as="header"
         justifyContent="space-between"

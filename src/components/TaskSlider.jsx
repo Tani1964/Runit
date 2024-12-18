@@ -1,6 +1,18 @@
-import { Box, Button, Flex, Heading, Text, Progress, Avatar, Link, Image, useToast, Spinner } from '@chakra-ui/react';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+  Progress,
+  Avatar,
+  Link,
+  Image,
+  useToast,
+  Spinner,
+} from "@chakra-ui/react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 
 function CustomCard() {
@@ -41,24 +53,23 @@ function CustomCard() {
   }, []);
 
   // Array of slides with text and image
-  const slides =[
+  const slides = [
     {
-      title: 'Post tasks and earn 10x more daily',
-      subtitle: 'Connect with clients faster and get hired',
-      image: 'https://via.placeholder.com/120x100?text=Runam+1',
+      title: "Post tasks and earn 10x more daily",
+      subtitle: "Connect with clients faster and get hired",
+      image: "https://via.placeholder.com/120x100?text=Runam+1",
     },
     {
-      title: 'Manage all your tasks effortlessly',
-      subtitle: 'Save time and stay productive',
-      image: 'https://via.placeholder.com/120x100?text=Runam+2',
+      title: "Manage all your tasks effortlessly",
+      subtitle: "Save time and stay productive",
+      image: "https://via.placeholder.com/120x100?text=Runam+2",
     },
     {
-      title: 'Grow your income with smart task management',
-      subtitle: 'Run your business with ease',
-      image: 'https://via.placeholder.com/120x100?text=Runam+3',
+      title: "Grow your income with smart task management",
+      subtitle: "Run your business with ease",
+      image: "https://via.placeholder.com/120x100?text=Runam+3",
     },
   ];
-  
 
   // Automatically cycle through slides every 3 seconds
   useEffect(() => {
@@ -70,7 +81,12 @@ function CustomCard() {
   }, [slides.length]);
 
   return (
-    <Flex gap={6} paddingY={6} align="center" display={['none', 'none', 'flex']}>
+    <Flex
+      gap={6}
+      paddingY={6}
+      align="center"
+      display={["none", "none", "flex"]}
+    >
       {/* Left Promotional Section with Slider */}
       <Box
         bgColor="#2B6CB0"
@@ -90,16 +106,17 @@ function CustomCard() {
           </Text>
           <Heading size="lg">{slides[currentIndex].title}</Heading>
         </Box>
-
-        <Button
-          bgColor="white"
-          color="#115e59"
-          size="md"
-          width="fit-content"
-          _hover={{ bgColor: 'gray.100' }}
-        >
-          Create a task now
-        </Button>
+        <Box borderWidth={2} borderColor={"#0a1016"} width={'fit-content' } borderRadius={9}>
+          <Button
+            bgColor="white"
+            color="#115e59"
+            size="md"
+            width="fit-content"
+            _hover={{ bgColor: "gray.100" }}
+          >
+            Create a task now
+          </Button>
+        </Box>
 
         {/* Slider Image */}
         <Image
@@ -116,9 +133,9 @@ function CustomCard() {
 
       {/* Right Profile Section */}
       <Box
-        bgColor="gray.400"
-        color={'#2b6cb0'}
-        borderColor={'#2b6cb0'}
+        // bgColor="gray.400"
+        color={"#2b6cb0"}
+        borderColor={"#2b6cb0"}
         borderWidth={2}
         borderRadius="20px"
         padding={4}
@@ -136,12 +153,12 @@ function CustomCard() {
           <>
             <Avatar
               size="lg"
-              colorScheme='blue'
+              colorScheme="blue"
               name={profile.my_referral_code?.user?.username || "Unknown"}
               src={`https://runit-78od.onrender.com/users/profile/avatar/`}
               mb={2}
             />
-            <Link fontWeight="bold" fontSize="md" color='#2b6cb0' isTruncated>
+            <Link fontWeight="bold" fontSize="md" color="#2b6cb0" isTruncated>
               {profile.my_referral_code?.user?.username || "User"}
             </Link>
             <Text fontSize="sm" color="gray.600" mt={1}>
