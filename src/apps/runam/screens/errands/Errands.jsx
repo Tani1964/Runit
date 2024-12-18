@@ -9,6 +9,7 @@ import {
   VStack,
   HStack,
   Button,
+  Spinner,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -18,6 +19,8 @@ const Errands = () => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [requests, setRequests] = useState([]);
+  const [loadingTasks, setLoadingTasks] = useState(true);
+  const [loadingRequests, setLoadingRequests] = useState(true);
   const { authState } = useAuth();
 
   // Check authentication and redirect if necessary
@@ -49,8 +52,12 @@ const Errands = () => {
 
       setTasks(taskResponse.data);
       setRequests(requestResponse.data);
+      setLoadingTasks(false);
+      setLoadingRequests(false);
     } catch (error) {
       console.error(error);
+      setLoadingTasks(false);
+      setLoadingRequests(false);
     }
   };
 
@@ -60,7 +67,7 @@ const Errands = () => {
   }, [authState.token]);
 
   return (
-    <Box bg="gray.100" minH="85vh" maxH={["100vh", "200vh"] }p={5} maxW={["90vw","93vw", "100vw"]}>
+    <Box bg="gray.100" minH="85vh" maxH={["100vh", "200vh"]} p={5} maxW={["90vw", "93vw", "100vw"]}>
       {/* Header */}
       <Box bg="white" p={5} mb={5} borderRadius="md" boxShadow="md">
         <Heading textAlign="center" mb={3}>
@@ -74,15 +81,18 @@ const Errands = () => {
           <Heading size="md" mb={3}>
             My Tasks
           </Heading>
-          <Box overflowX={"clip"}>
+          <Box overflowX="clip">
             <Flex
               gap={4}
-              width={"90vw"}
-              overflowX={"scroll"}
+              width="90vw"
+              overflowX="scroll"
               paddingRight={20}
               paddingLeft={2}
+              mb={5}
             >
-              {tasks.length > 0 ? (
+              {loadingTasks ? (
+                <Spinner size="lg" color="blue.500" />
+              ) : tasks.length > 0 ? (
                 tasks.map((task) => <TaskCard key={task.id} task={task} />)
               ) : (
                 <Text>No tasks available.</Text>
@@ -96,18 +106,18 @@ const Errands = () => {
           <Heading size="md" mb={3}>
             My Requests
           </Heading>
-          <Box overflowX={"clip"}>
+          <Box overflowX="clip">
             <Flex
               gap={4}
-              width={"90vw"}
-              overflowX={"scroll"}
+              width="90vw"
+              overflowX="scroll"
               paddingRight={20}
               paddingLeft={2}
             >
-              {requests.length > 0 ? (
-                requests.map((request) => (
-                  <RequestCard key={request.id} request={request} />
-                ))
+              {loadingRequests ? (
+                <Spinner size="lg" color="green.500" />
+              ) : requests.length > 0 ? (
+                requests.map((request) => <RequestCard key={request.id} request={request} />)
               ) : (
                 <Text>No requests available.</Text>
               )}
@@ -124,26 +134,11 @@ export default Errands;
 const TaskCard = ({ task }) => {
   const navigate = useNavigate();
   return (
-    <Box
-      bg="white"
-      p={4}
-      borderRadius="md"
-      boxShadow="md"
-      minW="300px"
-      maxW="300px"
-    >
+    <Box bg="white" p={4} borderRadius="md" boxShadow="md" minW="300px" maxW="300px">
       <HStack align="center" mb={3}>
-        <Avatar
-          size="md"
-          name={task.sender_name}
-          backgroundColor={"#010030"}
-          // src={task.image || "https://randomuser.me/api/portraits/men/44.jpg"}
-        />
+        <Avatar size="md" name={task.sender_name} backgroundColor={"#010030"} />
         <VStack align="start" spacing={0} flex={1}>
           <Text fontWeight="bold">{task.sender_name}</Text>
-          {/* <Text fontSize="sm" color="gray.500">
-          📍 {task.location}
-        </Text> */}
           <Text fontSize="sm" color="gray.500">
             📍 {task.status}
           </Text>
@@ -188,16 +183,8 @@ const TaskCard = ({ task }) => {
 
 const RequestCard = ({ request }) => {
   const navigate = useNavigate();
-
   return (
-    <Box
-      bg="white"
-      p={4}
-      borderRadius="md"
-      boxShadow="md"
-      minW="300px"
-      maxW="300px"
-    >
+    <Box bg="white" p={4} borderRadius="md" boxShadow="md" minW="300px" maxW="300px">
       <HStack align="center" mb={3}>
         <Avatar size="md" name={request.sender_name} />
         <VStack align="start" spacing={0} flex={1}>

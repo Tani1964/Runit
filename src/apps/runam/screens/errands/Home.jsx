@@ -27,7 +27,7 @@ import axios from "axios";
 import { useAuth } from "../../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   const { authState } = useAuth();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,58 +37,40 @@ export default function HomeScreen() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
   const navigate = useNavigate();
-
   const [searchQuery, setSearchQuery] = useState("");
 
-  const checkAuth = async () => {
-    if (!authState.authenticated) {
-      navigate("/runam/onboarding/");
-    }
-  };
+  useEffect(() => {
+    const checkAuth = () => {
+      if (!authState.authenticated) navigate("/runam/onboarding/");
+    };
 
-  const fetchData = async () => {
-    try {
-      const headers = {
-        Authorization: `Bearer ${authState.token}`,
-        "Content-Type": "application/json",
-      };
-      const response = await axios.get(
-        "https://runit-78od.onrender.com/tasks/",
-        { headers }
-      );
-      setData(response.data);
-    } catch (error) {
-      // console.log(error.response?.status )
-      if (error.response?.status == 401) {
-        localStorage.removeItem("runitAuthToken");
-        localStorage.removeItem("refreshToken");
-        navigate("/");
-        // toast({
-        //   title: "Error fetching data.",
-        //   description: error.message,
-        //   status: "error",
-        //   duration: 5000,
-        //   isClosable: true,
-        // });
+    const fetchData = async () => {
+      try {
+        const headers = {
+          Authorization: `Bearer ${authState.token}`,
+          "Content-Type": "application/json",
+        };
+        const response = await axios.get(
+          "https://runit-78od.onrender.com/tasks/",
+          { headers }
+        );
+        setData(response.data);
+      } catch (error) {
+        if (error.response?.status === 401) {
+          localStorage.removeItem("runitAuthToken");
+          localStorage.removeItem("refreshToken");
+          navigate("/");
+        }
+      } finally {
+        setLoading(false);
       }
-      // toast({
-      //   title: "Error fetching data.",
-      //   description: error.message,
-      //   status: "error",
-      //   duration: 5000,
-      //   isClosable: true,
-      // });
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  const openBidModal = (task) => {
-    setSelectedTask(task);
-    onOpen();
-  };
+    checkAuth();
+    fetchData();
+  }, [authState.token, navigate]);
 
-  const submitBid = async () => {
+  const handleBidSubmit = async () => {
     try {
       const headers = {
         Authorization: `Bearer ${authState.token}`,
@@ -106,22 +88,19 @@ export default function HomeScreen() {
         isClosable: true,
       });
       onClose();
-      fetchData(); // Refresh tasks after creating bid
+      setBidMessage("");
+      setBidPrice("");
+      fetchData();
     } catch (error) {
       toast({
         title: "Error creating bid.",
-        description: error.response.data.Error,
+        description: error.response?.data?.Error || "Something went wrong.",
         status: "error",
         duration: 5000,
         isClosable: true,
       });
     }
   };
-
-  useEffect(() => {
-    checkAuth();
-    fetchData();
-  }, [authState.token]);
 
   const filteredData = data.filter(
     (task) =>
@@ -139,7 +118,6 @@ export default function HomeScreen() {
 
   return (
     <VStack spacing={5} align="stretch" p={5}>
-      {/* Search Bar */}
       <Input
         placeholder="Search by location..."
         value={searchQuery}
@@ -184,20 +162,14 @@ export default function HomeScreen() {
               ₦{item.bidding_amount}
             </Text>
           </Flex>
-          {item.keywords.map((keyword) => {
-            <Tag>{keyword.toLowerCase()}</Tag>;
-          })}
-          <Flex direction={"row"} justifyContent={"space-between"}>
+
+          <Flex justifyContent="space-between">
             <Button
               onClick={() => navigate(`/runam/errands/runner/${item.id}`)}
             >
               View Task
             </Button>
-            <Button
-              colorScheme="teal"
-              onClick={() => openBidModal(item)}
-              isFullWidth
-            >
+            <Button colorScheme="teal" onClick={() => setSelectedTask(item) || onOpen()}>
               Create a Bid
             </Button>
           </Flex>
@@ -235,7 +207,7 @@ export default function HomeScreen() {
             />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="teal" mr={3} onClick={submitBid}>
+            <Button colorScheme="teal" mr={3} onClick={handleBidSubmit}>
               Submit Bid
             </Button>
             <Button variant="ghost" onClick={onClose}>
@@ -246,4 +218,6 @@ export default function HomeScreen() {
       </Modal>
     </VStack>
   );
-}
+};
+
+export default HomeScreen;

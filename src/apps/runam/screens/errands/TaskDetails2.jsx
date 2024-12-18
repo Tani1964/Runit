@@ -16,13 +16,18 @@ import {
   useDisclosure,
   useToast,
   Flex,
+  Image,
+  Avatar,
+  Card,
+  CardBody,
+  CardHeader,
 } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { axi, useAuth } from "../../../../context/AuthContext"; // Adjust the path if needed
 
 const TaskDetails = () => {
-  const { id } = useParams(); // Extract the task ID from the route
+  const { id } = useParams();
   const [task, setTask] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,9 +41,8 @@ const TaskDetails = () => {
   const [loadingBidders, setLoadingBidders] = useState(false);
   const [errorBidders, setErrorBidders] = useState(null);
   const [assigning, setAssigning] = useState(false);
-  const [completing, setCompleting] = useState(false); // New state for marking task as completed
+  const [completing, setCompleting] = useState(false);
 
-  // Fetch task by ID
   const fetchTask = async () => {
     try {
       const headers = {
@@ -54,7 +58,6 @@ const TaskDetails = () => {
     }
   };
 
-  // Fetch bidders for the task
   const fetchBidders = async () => {
     setLoadingBidders(true);
     setErrorBidders(null);
@@ -64,8 +67,6 @@ const TaskDetails = () => {
         "Content-Type": "application/json",
       };
       const response = await axi.get(`/tasks/${id}/bidders/`, { headers });
-
-      
       setBidders(response.data.Bidders);
     } catch (err) {
       setErrorBidders("Failed to load bidders");
@@ -74,7 +75,6 @@ const TaskDetails = () => {
     }
   };
 
-  // Assign task to a bidder
   const assignTask = async (bidderId) => {
     setAssigning(true);
     try {
@@ -82,11 +82,7 @@ const TaskDetails = () => {
         Authorization: `Bearer ${authState.token}`,
         "Content-Type": "application/json",
       };
-      await axi.post(
-        `/tasks/${id}/bidders/assign/${bidderId}/`,
-        {},
-        { headers }
-      );
+      await axi.post(`/tasks/${id}/bidders/assign/${bidderId}/`, {}, { headers });
       toast({
         title: "Task assigned successfully.",
         status: "success",
@@ -106,7 +102,6 @@ const TaskDetails = () => {
     }
   };
 
-  // Mark task as completed
   const completeTask = async () => {
     setCompleting(true);
     try {
@@ -121,7 +116,6 @@ const TaskDetails = () => {
         duration: 3000,
         isClosable: true,
       });
-      // Optionally, update task state to reflect completion
       setTask({ ...task, completed: true });
     } catch (err) {
       toast({
@@ -162,23 +156,24 @@ const TaskDetails = () => {
   }
 
   if (!task) {
-    return null; // Render nothing if task is not available yet
+    return null;
   }
 
   return (
-    <Box bg="gray.100" minH="100vh" p={5}>
-      <Box bg="white" p={5} mb={5} borderRadius="md" boxShadow="md">
+    <Box bg="gray.50" minH="100vh" p={5}>
+      <Box bg="white" p={5} mb={5} borderRadius="md" boxShadow="lg">
         <Heading size="lg">{task.name}</Heading>
-
         <Text color="gray.500" mt={2}>
           Task ID: {task.id}
         </Text>
         {task.completed ? (
-          <Text mb={2} color={"green"}>
+          <Text mb={2} color={"green.500"} fontWeight="bold">
             Completed!
           </Text>
         ) : (
-          <Text mb={2} color={"orange"}>Pending...</Text>
+          <Text mb={2} color={"orange.500"} fontWeight="bold">
+            Pending...
+          </Text>
         )}
       </Box>
 
@@ -188,7 +183,8 @@ const TaskDetails = () => {
         bg="white"
         p={5}
         borderRadius="md"
-        boxShadow="md"
+        boxShadow="lg"
+        mb={5}
       >
         {/* Task Details */}
         <Text fontSize="md">
@@ -216,71 +212,72 @@ const TaskDetails = () => {
           <strong>Paid:</strong> {task.paid ? "Yes" : "No"}
         </Text>
 
-        {/* Modal for Bidders */}
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Bidders for Task</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              {loadingBidders ? (
-                <Spinner size="md" />
-              ) : errorBidders ? (
-                <Text color="red.500">{errorBidders}</Text>
-              ) : bidders.length > 0 ? (
-                bidders.map((bidder, index) => (
-                  <Box key={index} p={3} borderBottom="1px solid #e0e0e0">
-                    <Text>
-                      <strong>Bidder {index + 1}</strong>
-                    </Text>
-                    <Text>Name: {bidder.user}</Text>
-                    <Text>Bid Amount: ₦{bidder.price}</Text>
-                    <Text>Proposal: {bidder.message}</Text>
-                    <Button
-                      colorScheme="green"
-                      mt={2}
-                      isLoading={assigning}
-                      onClick={() => assignTask(bidder.user)}
-                    >
-                      Assign Task
-                    </Button>
-                  </Box>
-                ))
-              ) : (
-                <Text>No bidders available.</Text>
-              )}
-            </ModalBody>
-
-            <ModalFooter>
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
-                Close
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-
-        <Flex width={"100%"} direction="row" justify="space-between">
-          {/* View Bidders Button */}
-          {/* <Button colorScheme="blue" onClick={handleViewBidders}>
-            View Bidders
-          </Button> */}
-
-          {/* Complete Task Button */}
-          {/* <Button
-            colorScheme="green"
-            isLoading={completing}
-            onClick={completeTask}
-            disabled={task.completed} // Disable if task is already completed
-          >
-            {task.completed ? "Task Completed" : "Mark as Completed"} */}
-          {/* </Button> */}
-
-          {/* Navigation Back */}
-          <Button colorScheme="blue" onClick={() => navigate(-1)}>
-            Go Back
-          </Button>
-        </Flex>
+        {/* Task Image */}
+        {task.image&&<Card width="full">
+          <CardHeader>
+            <Heading size="md">Task Image</Heading>
+          </CardHeader>
+          <CardBody>
+            {console.log(task.image)}
+            <Image
+              src={task.image}
+              alt={`Task image for ${task.name}`}
+              boxSize="200px"
+              objectFit="cover"
+              borderRadius="md"
+            />
+          </CardBody>
+        </Card>}
       </VStack>
+
+      {/* Modal for Bidders */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Bidders for Task</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {loadingBidders ? (
+              <Spinner size="md" />
+            ) : errorBidders ? (
+              <Text color="red.500">{errorBidders}</Text>
+            ) : bidders.length > 0 ? (
+              bidders.map((bidder, index) => (
+                <Box key={index} p={3} borderBottom="1px solid #e0e0e0">
+                  <Text>
+                    <strong>Bidder {index + 1}</strong>
+                  </Text>
+                  <Text>Name: {bidder.user}</Text>
+                  <Text>Bid Amount: ₦{bidder.price}</Text>
+                  <Text>Proposal: {bidder.message}</Text>
+                  <Button
+                    colorScheme="green"
+                    mt={2}
+                    isLoading={assigning}
+                    onClick={() => assignTask(bidder.user)}
+                  >
+                    Assign Task
+                  </Button>
+                </Box>
+              ))
+            ) : (
+              <Text>No bidders available.</Text>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* Navigation Back */}
+      <Flex width={"100%"} direction="row" justify="space-between" mt={4}>
+        <Button colorScheme="blue" onClick={() => navigate(-1)}>
+          Go Back
+        </Button>
+      </Flex>
     </Box>
   );
 };
