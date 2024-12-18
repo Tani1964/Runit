@@ -25,7 +25,7 @@ const ProfileLayout = () => {
         
 
         <Box flex="1" p={4}>
-          <Divider />
+          {/* <Divider /> */}
           <Outlet />
         </Box>
       </Flex>

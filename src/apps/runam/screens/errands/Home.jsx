@@ -6,6 +6,8 @@ import {
   CircularProgress,
   Flex,
   Heading,
+  Grid,
+  GridItem,
   IconButton,
   Input,
   Modal,
@@ -117,72 +119,83 @@ const HomeScreen = () => {
   }
 
   return (
-    <VStack spacing={5} align="stretch" p={5}>
+    <VStack spacing={5} align="stretch" bgColor={'gray.50'} p={5}>
       <Input
         placeholder="Search by location..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         mb={4}
       />
-
-      {filteredData.map((item) => (
-        <Box
-          key={item.id}
-          bg="white"
-          p={5}
-          borderRadius="md"
-          shadow="md"
-          mb={4}
-        >
-          <Flex justify="space-between" align="center">
-            <Box>
-              <Text fontWeight="bold">{item.sender_name}</Text>
-              <Text fontSize="sm" color="gray.500">
-                {item.deliver_to || item.pick_up}
+      <Grid
+        width={"85vw"}
+        templateColumns={["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"]}
+        gap={4}
+      >
+        {filteredData.map((item) => (
+          <GridItem
+            key={item.id}
+            bg="white"
+            width={["80vw", "85vw", "30vw"]}
+            p={5}
+            borderRadius="md"
+            shadow="md"
+            mb={4}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'space-between'}
+          >
+            <Flex justify="space-between" align="center">
+              <Box>
+                <Text fontWeight="bold">{item.sender_name}</Text>
+                <Text fontSize="sm" color="gray.500">
+                  {item.deliver_to || item.pick_up}
+                </Text>
+              </Box>
+              <Tag
+                colorScheme={item.type === "Solo" ? "green" : "red"}
+                borderRadius="full"
+              >
+                {item.type}
+              </Tag>
+            </Flex>
+            <>
+              <Heading size="md" mt={2} mb={1}>
+                {item.name}
+              </Heading>
+              <Text color="gray.600" mb={2}>
+                {item.description}
               </Text>
-            </Box>
-            <Tag
-              colorScheme={item.type === "Solo" ? "green" : "red"}
-              borderRadius="full"
-            >
-              {item.type}
-            </Tag>
-          </Flex>
 
-          <Heading size="md" mt={2} mb={1}>
-            {item.name}
-          </Heading>
-          <Text color="gray.600" mb={2}>
-            {item.description}
-          </Text>
-
-          <Flex align="center" mb={3}>
-            <FaMoneyBillWave color="green" />
-            <Text ml={2} fontWeight="bold" color="green.500">
-              ₦{item.bidding_amount}
-            </Text>
-          </Flex>
-
-          <Flex justifyContent="space-between">
-            <Button
-              onClick={() => navigate(`/runam/errands/runner/${item.id}`)}
-            >
-              View Task
-            </Button>
-            <Button colorScheme="teal" onClick={() => setSelectedTask(item) || onOpen()}>
-              Create a Bid
-            </Button>
-          </Flex>
-        </Box>
-      ))}
-
+              <Flex align="center" mb={3}>
+                <FaMoneyBillWave color="green" />
+                <Text ml={2} fontWeight="bold" color="green.500">
+                  ₦{item.bidding_amount}
+                </Text>
+              </Flex>
+            </>
+            <Flex justifyContent="space-between">
+              <Button
+                onClick={() => navigate(`/runam/errands/runner/${item.id}`)}
+              >
+                View Task
+              </Button>
+              <Button
+                colorScheme="teal"
+                onClick={() => setSelectedTask(item) || onOpen()}
+              >
+                Create a Bid
+              </Button>
+            </Flex>
+          </GridItem>
+        ))}
+      </Grid>
       <IconButton
         icon={<FaPaperPlane />}
         colorScheme="blue"
         size="lg"
         borderRadius="full"
         position="fixed"
-        bottom="20px"
+        top="80px"
         right="20px"
         onClick={() => navigate("/runam/errands/create")}
       />

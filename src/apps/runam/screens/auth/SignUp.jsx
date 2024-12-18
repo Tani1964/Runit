@@ -68,8 +68,8 @@ const Signup = () => {
   };
 
   return (
-    <Center maxH="100vh" bg="gray.50" color="#010030">
-      <Box bg="white" p={8} borderRadius="lg" shadow="md" width={["80vw","70vw", "30vw"]}>
+    <Center minH="100vh"  color="#010030">
+      <Box bg="white" p={8} borderRadius="lg" height={["80vh","80vh", "80vh"]} shadow="md" width={["80vw","70vw", "30vw"]} overflowY={'scroll'}>
         <VStack spacing={6} align="stretch">
           <Flex justifyContent={"center"}>
             <Image src={Logo} alt="Logo" width="30%" mb={6} />
