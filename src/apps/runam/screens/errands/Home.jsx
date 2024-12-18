@@ -28,6 +28,7 @@ import { FaMoneyBillWave, FaPaperPlane } from "react-icons/fa";
 import axios from "axios";
 import { useAuth } from "../../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import TaskSlider from "../../../../components/TaskSlider";
 
 const HomeScreen = () => {
   const { authState } = useAuth();
@@ -119,7 +120,8 @@ const HomeScreen = () => {
   }
 
   return (
-    <VStack spacing={5} align="stretch" bgColor={'gray.50'} p={5}>
+    <Box spacing={5} align="stretch" bgColor={'gray.50'} p={5}>
+      <TaskSlider visibility={['none']}/>
       <Input
         placeholder="Search by location..."
         value={searchQuery}
@@ -180,7 +182,7 @@ const HomeScreen = () => {
                 View Task
               </Button>
               <Button
-                colorScheme="teal"
+                colorScheme="blue"
                 onClick={() => setSelectedTask(item) || onOpen()}
               >
                 Create a Bid
@@ -229,7 +231,7 @@ const HomeScreen = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </VStack>
+    </Box>
   );
 };
 

@@ -6,3 +6,20 @@
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #020131;
 }
+/* TaskSlider.css */
+.task-slider {
+    display: none; /* Default visibility for small screens */
+  }
+  
+  @media (min-width: 600px) {
+    .task-slider {
+      display: block; /* Visible on tablet and above */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .task-slider {
+      display: inline-block; /* Visible as inline-block on desktop and above */
+    }
+  }
+  

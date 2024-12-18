@@ -15,7 +15,7 @@ const ProfileLayout = () => {
         justifyContent="space-between"
         alignItems="center"
         p={4}
-        bg="teal.500"
+        bg={'#2b6cb0'}
         color="white"
         maxW={'100%'}
         maxH={'100vh'}
