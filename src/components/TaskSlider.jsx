@@ -14,6 +14,9 @@ import {
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import image1 from "../Assets/runamImages/3done.png";
+import image2 from "../Assets/runamImages/3dtwo.png";
+import image3 from "../Assets/runamImages/3dthree.png";
 
 function CustomCard() {
   const { authState } = useAuth();
@@ -42,13 +45,13 @@ function CustomCard() {
       setPicture(profilePic.data.avatar)
       setProfile(profileResponse.data);
     } catch (error) {
-      toast({
-        title: "Error fetching profile.",
-        description: "Please try again later.",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-      });
+      // toast({
+      //   title: "Error fetching profile.",
+      //   description: "Please try again later.",
+      //   status: "error",
+      //   duration: 5000,
+      //   isClosable: true,
+      // });
     } finally {
       setIsLoading(false);
     }
@@ -63,17 +66,17 @@ function CustomCard() {
     {
       title: "Post tasks and earn 10x more daily",
       subtitle: "Connect with clients faster and get hired",
-      image: "https://via.placeholder.com/120x100?text=Runam+1",
+      image: image1,
     },
     {
       title: "Manage all your tasks effortlessly",
       subtitle: "Save time and stay productive",
-      image: "https://via.placeholder.com/120x100?text=Runam+2",
+      image: image2,
     },
     {
       title: "Grow your income with smart task management",
       subtitle: "Run your business with ease",
-      image: "https://via.placeholder.com/120x100?text=Runam+3",
+      image: image3,
     },
   ];
 
@@ -131,15 +134,15 @@ function CustomCard() {
           position="absolute"
           bottom="10px"
           right="10px"
-          boxSize="120px"
+          boxSize="180px"
           borderRadius="10px"
-          bg="gray.100"
+          bg="#2b6cb0"
         />
       </Box>
 
       {/* Right Profile Section */}
       <Box
-        // bgColor="gray.400"
+        bgColor="white"
         color={"#2b6cb0"}
         borderColor={"#2b6cb0"}
         borderWidth={2}
