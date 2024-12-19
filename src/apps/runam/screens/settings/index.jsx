@@ -12,10 +12,14 @@ import {
   useToast,
   Spinner,
   Flex,
-  Text
+  Text,
+  Divider,
+  Card,
+  CardBody,
+  CardFooter,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useAuth } from "../../../../context/AuthContext"; // Assuming AuthContext is set up
+import { useAuth } from "../../../../context/AuthContext";
 
 const Settings = () => {
   const { authState } = useAuth();
@@ -29,32 +33,19 @@ const Settings = () => {
     location: "",
     avatar: "",
   });
-  const [newAvatar, setNewAvatar] = useState(null); // To store the new avatar
+  const [newAvatar, setNewAvatar] = useState(null);
   const toast = useToast();
 
-  // Fetch User Profile and Avatar
   const fetchProfile = async () => {
     try {
-      // Fetch profile details
-      const profileResponse = await axios.get(
-        "https://runit-78od.onrender.com/users/profile/",
-        {
-          headers: {
-            Authorization: `Bearer ${authState.token}`,
-          },
-        }
-      );
-
-      // Fetch profile avatar
-      const avatarResponse = await axios.get(
-        "https://runit-78od.onrender.com/users/profile/avatar/",
-        {
-          headers: {
-            Authorization: `Bearer ${authState.token}`,
-          },
-        }
-      );
-
+      const [profileResponse, avatarResponse] = await Promise.all([
+        axios.get("https://runit-78od.onrender.com/users/profile/", {
+          headers: { Authorization: `Bearer ${authState.token}` },
+        }),
+        axios.get("https://runit-78od.onrender.com/users/profile/avatar/", {
+          headers: { Authorization: `Bearer ${authState.token}` },
+        }),
+      ]);
       setProfile(profileResponse.data);
       setFormData({
         bio: profileResponse.data.bio || "",
@@ -75,7 +66,6 @@ const Settings = () => {
     }
   };
 
-  // Update User Profile
   const updateProfile = async () => {
     setIsSaving(true);
     try {
@@ -95,10 +85,9 @@ const Settings = () => {
         duration: 5000,
         isClosable: true,
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "Error updating profile.",
-        description: "Please try again later.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -108,10 +97,8 @@ const Settings = () => {
     }
   };
 
-  // Upload New Avatar
   const uploadAvatar = async () => {
     if (!newAvatar) return;
-
     const formData = new FormData();
     formData.append("avatar", newAvatar);
 
@@ -127,17 +114,16 @@ const Settings = () => {
           },
         }
       );
-      setFormData((prevData) => ({ ...prevData, avatar: response.data.avatar }));
+      setFormData((prev) => ({ ...prev, avatar: response.data.avatar }));
       toast({
         title: "Avatar updated successfully.",
         status: "success",
         duration: 5000,
         isClosable: true,
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "Error updating avatar.",
-        description: "Please try again later.",
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -147,13 +133,11 @@ const Settings = () => {
     }
   };
 
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle avatar file selection
   const handleAvatarChange = (e) => {
     setNewAvatar(e.target.files[0]);
   };
@@ -164,83 +148,102 @@ const Settings = () => {
 
   if (isLoading) {
     return (
-      <Box minH="100vh" display="flex" alignItems="center" justifyContent="center">
+      <Box
+        minH="100vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Spinner size="xl" />
       </Box>
     );
   }
-
+  console.log(profile);
   return (
-    <Box bg="gray.100" minH="100vh" p={8}>
-      <VStack spacing={8} align="stretch">
-        <Heading textAlign="center">Settings</Heading>
-
-        <VStack spacing={4} align="stretch" bg="white" p={8} borderRadius="md" boxShadow="md">
-          <Avatar size="xl" src={formData.avatar} name={profile?.my_referral_code?.user.username} />
-
-          <FormControl>
-            <FormLabel>Update Avatar</FormLabel>
-            <Input type="file" accept="image/*" onChange={handleAvatarChange} />
+    <Box bg="gray.50" minH="100vh" py={10} px={5}>
+      <VStack spacing={8}>
+        <Heading size="lg">Settings</Heading>
+        <Card bg="white" borderRadius="lg" boxShadow="md" w="100%" maxW="lg">
+          <CardBody>
+            <VStack spacing={5}>
+              <Avatar
+                size="2xl"
+                src={formData.avatar}
+                name={profile?.username}
+              />
+              <FormControl>
+                <FormLabel>Update Avatar</FormLabel>
+                <Flex align="center" gap={3}>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                  />
+                  {newAvatar && <Text fontSize="sm">{newAvatar.name}</Text>}
+                </Flex>
+                <Button
+                  mt={2}
+                  colorScheme="blue"
+                  onClick={uploadAvatar}
+                  isLoading={isUploadingAvatar}
+                  isDisabled={!newAvatar}
+                >
+                  Upload
+                </Button>
+              </FormControl>
+              <Divider />
+              <FormControl>
+                <FormLabel>Username</FormLabel>
+                <Input
+                  value={profile?.my_referral_code.user.username}
+                  isReadOnly
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  value={profile?.my_referral_code.user.email}
+                  isReadOnly
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Phone Number</FormLabel>
+                <Input
+                  name="phone_number"
+                  value={formData.phone_number}
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Bio</FormLabel>
+                <Textarea
+                  name="bio"
+                  value={formData.bio}
+                  onChange={handleChange}
+                  placeholder="Tell us a bit about yourself..."
+                />
+              </FormControl>
+              <FormControl>
+                <FormLabel>Location</FormLabel>
+                <Input
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </VStack>
+          </CardBody>
+          <CardFooter>
             <Button
-              mt={2}
               colorScheme="blue"
-              isLoading={isUploadingAvatar}
-              onClick={uploadAvatar}
-              disabled={!newAvatar}
+              onClick={updateProfile}
+              isLoading={isSaving}
+              w="full"
             >
-              Upload Avatar
+              Save Changes
             </Button>
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Username</FormLabel>
-            <Input value={profile?.my_referral_code?.user.username} isReadOnly />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <Input value={profile?.my_referral_code?.user.email} isReadOnly />
-          </FormControl>
-
-          <FormControl isRequired>
-            <FormLabel>Phone Number</FormLabel>
-            <Input
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Bio</FormLabel>
-            <Textarea
-              name="bio"
-              value={formData.bio}
-              onChange={handleChange}
-              placeholder="Tell us a bit about yourself..."
-            />
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Location</FormLabel>
-            <Input
-              name="location"
-              value={formData.location}
-              onChange={handleChange}
-              placeholder="Enter your location"
-            />
-          </FormControl>
-          <Flex>
-            <Text>Referral Code: {profile.my_referral_code.code}</Text>
-          </Flex>
-          <Button
-            colorScheme="teal"
-            isLoading={isSaving}
-            onClick={updateProfile}
-          >
-            Save Changes
-          </Button>
-        </VStack>
+          </CardFooter>
+        </Card>
       </VStack>
     </Box>
   );

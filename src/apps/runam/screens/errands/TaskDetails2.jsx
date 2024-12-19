@@ -21,6 +21,8 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -213,64 +215,40 @@ const TaskDetails = () => {
         </Text>
 
         {/* Task Image */}
-        {task.image&&<Card width="full">
-          <CardHeader>
-            <Heading size="md">Task Image</Heading>
-          </CardHeader>
-          <CardBody>
-            {console.log(task.image)}
-            <Image
-              src={task.image}
-              alt={`Task image for ${task.name}`}
-              boxSize="200px"
-              objectFit="cover"
-              borderRadius="md"
-            />
-          </CardBody>
-        </Card>}
+        {task.image && (
+          <Card width="full">
+            <CardHeader>
+              <Heading size="md">Task Image</Heading>
+            </CardHeader>
+            <CardBody>
+              {console.log(task.image)}
+              <Image
+                src={task.image}
+                alt={`Task image for ${task.name}`}
+                boxSize="200px"
+                objectFit="cover"
+                borderRadius="md"
+              />
+            </CardBody>
+          </Card>
+        )}
       </VStack>
 
-      {/* Modal for Bidders */}
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Bidders for Task</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {loadingBidders ? (
-              <Spinner size="md" />
-            ) : errorBidders ? (
-              <Text color="red.500">{errorBidders}</Text>
-            ) : bidders.length > 0 ? (
-              bidders.map((bidder, index) => (
-                <Box key={index} p={3} borderBottom="1px solid #e0e0e0">
-                  <Text>
-                    <strong>Bidder {index + 1}</strong>
-                  </Text>
-                  <Text>Name: {bidder.user}</Text>
-                  <Text>Bid Amount: ₦{bidder.price}</Text>
-                  <Text>Proposal: {bidder.message}</Text>
-                  <Button
-                    colorScheme="green"
-                    mt={2}
-                    isLoading={assigning}
-                    onClick={() => assignTask(bidder.user)}
-                  >
-                    Assign Task
-                  </Button>
-                </Box>
-              ))
-            ) : (
-              <Text>No bidders available.</Text>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      {/* Keyword Buttons */}
+      {task.keywords && (
+        <Box bg="white" p={5} borderRadius="md" boxShadow="lg" mt={5}>
+          <Heading size="md" mb={4}>Keywords</Heading>
+          <Wrap spacing={4}>
+            {task.keywords.map((keyword, index) => (
+              <WrapItem key={index}>
+                <Button size="sm" colorScheme="blue">
+                  {keyword}
+                </Button>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Box>
+      )}
 
       {/* Navigation Back */}
       <Flex width={"100%"} direction="row" justify="space-between" mt={4}>

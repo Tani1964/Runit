@@ -148,6 +148,8 @@ const HomeScreen = () => {
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"space-between"}
+            borderWidth={1}
+                borderColor={"#3182ce"}
           >
             <Flex justify="space-between" align="center">
               <Box>
@@ -187,6 +189,7 @@ const HomeScreen = () => {
               >
                 <Button
                   onClick={() => navigate(`/runam/errands/runner/${item.id}`)}
+                  shadow="md"
                 >
                   View Task
                 </Button>
@@ -199,6 +202,7 @@ const HomeScreen = () => {
               >
                 <Button
                   colorScheme="blue"
+                  shadow="md"
                   onClick={() => setSelectedTask(item) || onOpen()}
                 >
                   Create a Bid
@@ -213,6 +217,8 @@ const HomeScreen = () => {
         colorScheme="blue"
         size="lg"
         borderRadius="full"
+        borderWidth={1}
+        borderColor={'#0a1016'}
         position="fixed"
         top="80px"
         right="20px"

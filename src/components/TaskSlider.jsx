@@ -19,6 +19,7 @@ function CustomCard() {
   const { authState } = useAuth();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [profile, setProfile] = useState(null);
+  const [picture, setPicture] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const toast = useToast();
 
@@ -33,7 +34,12 @@ function CustomCard() {
           },
         }
       );
+      const profilePic = await axios.get("https://runit-78od.onrender.com/users/profile/avatar/", {
+        headers: { Authorization: `Bearer ${authState.token}` },
+      })
 
+
+      setPicture(profilePic.data.avatar)
       setProfile(profileResponse.data);
     } catch (error) {
       toast({
@@ -155,7 +161,7 @@ function CustomCard() {
               size="lg"
               colorScheme="blue"
               name={profile.my_referral_code?.user?.username || "Unknown"}
-              src={`https://runit-78od.onrender.com/users/profile/avatar/`}
+              src={picture}
               mb={2}
             />
             <Link fontWeight="bold" fontSize="md" color="#2b6cb0" isTruncated>

@@ -58,6 +58,7 @@ function Container2() {
             />
           </div>
           <div></div>
+          {/* <div className="flex justify-start animate-bounce"> */}
           <div className="flex justify-start animate-bounce">
             <img
               src={Other16}
