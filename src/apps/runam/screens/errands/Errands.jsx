@@ -14,6 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../../../context/AuthContext"; // Adjust the path if needed
+import { DeleteIcon } from "@chakra-ui/icons";
 
 const Errands = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const Errands = () => {
   const [requests, setRequests] = useState([]);
   const [loadingTasks, setLoadingTasks] = useState(true);
   const [loadingRequests, setLoadingRequests] = useState(true);
+  const [deleteId, setDeleteId] = useState(null);
   const { authState } = useAuth();
 
   // Check authentication and redirect if necessary
@@ -207,6 +209,23 @@ const TaskCard = ({ task }) => {
 };
 
 const RequestCard = ({ request }) => {
+  const { authState } = useAuth();
+
+  const headers = {
+    Authorization: `Bearer ${authState.token}`,
+    "Content-Type": "application/json",
+  };
+  const deleteTasks = async (id) => {
+    try {
+      console.log(id);
+       await axios.delete(`https://runit-78od.onrender.com/tasks/${id}`,  {
+        headers,
+      });
+      navigate(0)
+    } catch (error) {
+      throw error;
+    }
+  };
   const navigate = useNavigate();
   return (
     <Box
@@ -233,6 +252,20 @@ const RequestCard = ({ request }) => {
             Solo
           </Text>
         </Box>
+        <Flex height={"full"}>
+          <Box
+            bgColor={"gray.300"}
+            cursor={"pointer"}
+            _hover={{ color: "gray.300", backgroundColor: "#010030" }}
+            paddingY={2}
+            paddingX={3}
+            height={"fit-content"}
+            borderRadius={"full"}
+            onClick={() => deleteTasks(request.id)}
+          >
+            <DeleteIcon />
+          </Box>
+        </Flex>
       </HStack>
 
       <Text mb={2}>{request.name}</Text>
