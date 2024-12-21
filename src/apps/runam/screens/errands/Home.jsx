@@ -32,7 +32,8 @@ import { useNavigate } from "react-router-dom";
 import { FaMoneyBillWave, FaPlus } from "react-icons/fa"; // Added FaPlus for floating button
 import TaskSlider from "../../../../components/TaskSlider";
 import { format } from "date-fns"; // For date formatting
-import {  FaPaperPlane } from "react-icons/fa";
+import { FaPaperPlane } from "react-icons/fa";
+import Draggable from "react-draggable";
 
 const HomeScreen = () => {
   const { authState } = useAuth();
@@ -154,7 +155,6 @@ const HomeScreen = () => {
 
     return filterCondition;
   });
-  
 
   // Show message if no results are found
   const noResults =
@@ -238,7 +238,7 @@ const HomeScreen = () => {
             flexDirection={"column"}
             justifyContent={"space-between"}
             borderWidth={1}
-                borderColor={"#3182ce"}
+            borderColor={"#3182ce"}
           >
             <Flex justify="space-between" align="center">
               <Box>
@@ -303,18 +303,21 @@ const HomeScreen = () => {
       </Grid>
 
       {/* Floating Button for creating a new bid */}
-      <IconButton
-        icon={<FaPaperPlane />}
-        colorScheme="blue"
-        size="lg"
-        borderRadius="full"
-        borderWidth={1}
-        borderColor={"#0a1016"}
-        position="fixed"
-        top="80px"
-        right="20px"
-        onClick={() => navigate("/runam/errands/create")}
-      />
+      <Draggable>
+        <IconButton
+          icon={<FaPaperPlane />}
+          colorScheme="blue"
+          size="lg"
+          borderRadius="full"
+          borderWidth={1}
+          borderColor={"#0a1016"}
+          position="fixed"
+          top="80px"
+          right="20px"
+          zIndex="10"
+          onClick={() => navigate("/runam/errands/create")}
+        />
+      </Draggable>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
