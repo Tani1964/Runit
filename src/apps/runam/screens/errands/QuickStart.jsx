@@ -6,11 +6,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import AssemblyIcon from "../../../../Assets/runamImages/services/Handyman.png";
 import MountingIcon from "../../../../Assets/runamImages/services/Tutorials.png";
 import MovingIcon from "../../../../Assets/runamImages/services/delivery.png";
-import CleaningIcon from "../../../../Assets/runamImages/services/cleaning.png";
-import OutdoorHelpIcon from "../../../../Assets/runamImages/services/software.png";
-import HomeRepairsIcon from "../../../../Assets/runamImages/services/delivery.png";
+import CleaningIcon from "../../../../Assets/runamImages/services/catering.png";
 import PaintingIcon from "../../../../Assets/runamImages/services/Health Services.png";
-import TrendingIcon from "../../../../Assets/runamImages/services/delivery.png";
 import FoodIcon from "../../../../Assets/runamImages/services/catering.png";
 
 const QuickStart = () => {
@@ -46,7 +43,7 @@ const QuickStart = () => {
         Quick Start
       </Heading>
       <SimpleGrid
-        columns={{ base: 2, sm: 3, md: 4 }}
+        columns={{ base: 2, sm: 3, md: 6 }}
         gap={6}
         justifyContent="center"
       >
@@ -54,7 +51,7 @@ const QuickStart = () => {
           <Box
             key={index}
             textAlign="center"
-            p={4}
+            paddingY={4}
             borderRadius="md"
             borderWidth="1px"
             borderColor="gray.300"
