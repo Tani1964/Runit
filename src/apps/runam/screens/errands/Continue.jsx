@@ -24,12 +24,12 @@ const ContinueErrand = () => {
   const { authState } = useAuth();
 
   const {
-    requestType = "",
-    pick_up = "",
-    deliverTo = "",
-    description = "",
-    title = "",
-  } = state || {};
+    requestType = state?.type,
+    pick_up = state?.pick_up,
+    deliverTo = state?.deliver_to,
+    description = state?.description,
+    name = state?.name,
+  } = state || {}; 
 
   const [price, setPrice] = useState("");
   const [tip, setTip] = useState("");
@@ -119,12 +119,12 @@ const ContinueErrand = () => {
       };
 
       const payload = {
-        name: title,
+        name: name,
         description,
         pick_up,
         deliver_to: deliverTo,
         bidding_amount: price,
-        type: requestType,
+        type: 'Solo',
         keywords, // Include keywords in the payload
       };
 

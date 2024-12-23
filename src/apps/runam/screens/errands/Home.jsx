@@ -34,6 +34,7 @@ import TaskSlider from "../../../../components/TaskSlider";
 import { format } from "date-fns"; // For date formatting
 import { FaPaperPlane } from "react-icons/fa";
 import Draggable from "react-draggable";
+import QuickStart from "./QuickStart";
 
 const HomeScreen = () => {
   const { authState } = useAuth();
@@ -172,6 +173,7 @@ const HomeScreen = () => {
   return (
     <Box spacing={5} align="stretch" bgColor={"gray.50"} p={5}>
       <TaskSlider visibility={["none"]} />
+      <QuickStart/>
       <Flex mb={4} gap={4} alignItems={"center"}>
         {/* Filter Type Dropdown */}
         <FormControl width={"30%"} mb={4}>

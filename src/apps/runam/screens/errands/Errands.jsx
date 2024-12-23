@@ -14,7 +14,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../../../context/AuthContext"; // Adjust the path if needed
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 const Errands = () => {
   const navigate = useNavigate();
@@ -252,7 +252,23 @@ const RequestCard = ({ request }) => {
             Solo
           </Text>
         </Box>
-        <Flex height={"full"}>
+        <Flex height={"full"} gap={2}>
+        <Box
+            bgColor={"#010030"}
+            cursor={"pointer"}
+            color={'gray.300'}
+            _hover={{ color: "#010030", backgroundColor: "gray.300" }}
+            paddingY={2}
+            paddingX={3}
+            height={"fit-content"}
+            borderRadius={"full"}
+            onClick={() => {
+              navigate(`/runam/errands/create/${request.id}`
+              );
+            }}
+          >
+            <EditIcon />
+          </Box>
           <Box
             bgColor={"gray.300"}
             cursor={"pointer"}

@@ -46,6 +46,7 @@ function App() {
               <Route path="history" element={<TaskHistory />} />
               <Route path="create" element={<CreateErrand />} />
               <Route path="continue" element={<ContinueErrand />} />
+              <Route path="create/:urlCategory" element={<CreateErrand />} />
               </Route>
               <Route path="/runam/settings/*" element={<ProfileLayout />}>
               <Route index element={<Settings />} />
